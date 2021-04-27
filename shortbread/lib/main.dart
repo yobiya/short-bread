@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shortbread/view/BoxListView.dart';
 
 void main() {
   runApp(MyApp());
@@ -44,14 +45,7 @@ class _MyHomePageState extends State<MyHomePage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Expanded(
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
-          ),
+          Expanded(child: BoxListView()),
           VerticalDivider(
             color: Colors.grey,
             thickness: 1,
