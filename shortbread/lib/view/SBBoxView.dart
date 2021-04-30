@@ -3,11 +3,7 @@ import 'package:flutter/material.dart';
 class SBBoxView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-      ),
+    return Card(
       child: Padding(
         padding: const EdgeInsets.all(8),
         child: Align(
