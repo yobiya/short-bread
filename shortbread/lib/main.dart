@@ -11,7 +11,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
-        primarySwatch: Colors.amber,
+        primarySwatch: Colors.blue,
       ),
       home: MyHomePage(title: 'Short-bread'),
     );
@@ -40,7 +40,7 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: BoxDecoration(color: Colors.amber[100]),
+      decoration: BoxDecoration(color: Theme.of(context).backgroundColor),
       padding: EdgeInsets.all(10),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
