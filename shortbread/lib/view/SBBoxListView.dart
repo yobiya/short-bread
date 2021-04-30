@@ -17,8 +17,14 @@ class SBBoxListView extends StatelessWidget {
   Column _buildSBBoxesColumn() {
     var contents = <Widget>[];
 
-    contents.add(SBBoxView());
-    contents.add(SBBoxView());
+    contents.add(Padding(
+      padding: EdgeInsets.fromLTRB(4, 4, 4, 2),
+      child: SBBoxView(),
+    ));
+    contents.add(Padding(
+      padding: EdgeInsets.fromLTRB(4, 2, 4, 2),
+      child: SBBoxView(),
+    ));
     contents.add(ExpandedSpace());
 
     return Column(children: contents);
