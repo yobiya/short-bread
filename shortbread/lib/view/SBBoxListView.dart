@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:shortbread/view/BoxView.dart';
+import 'package:shortbread/view/SBBoxView.dart';
 import 'package:shortbread/view/ExpandedSpace.dart';
 
-class BoxListView extends StatelessWidget {
+class SBBoxListView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -12,8 +12,8 @@ class BoxListView extends StatelessWidget {
       ),
       child: Column(
         children: [
-          BoxView(),
-          BoxView(),
+          SBBoxView(),
+          SBBoxView(),
           ExpandedSpace(),
         ],
       ),

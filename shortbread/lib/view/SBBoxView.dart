@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class BoxView extends StatelessWidget {
+class SBBoxView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
