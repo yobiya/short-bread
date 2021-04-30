@@ -10,13 +10,17 @@ class SBBoxListView extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
       ),
-      child: Column(
-        children: [
-          SBBoxView(),
-          SBBoxView(),
-          ExpandedSpace(),
-        ],
-      ),
+      child: _buildSBBoxesColumn(),
     );
+  }
+
+  Column _buildSBBoxesColumn() {
+    var contents = <Widget>[];
+
+    contents.add(SBBoxView());
+    contents.add(SBBoxView());
+    contents.add(ExpandedSpace());
+
+    return Column(children: contents);
   }
 }
