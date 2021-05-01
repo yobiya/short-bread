@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'controller/box/SBBoxController.dart';
-import 'view-data/card/SBCardViewData.dart';
+import 'controller/card/SBCardController.dart';
 import 'view/card/SBCardListView.dart';
 
 void main() {
@@ -24,6 +24,7 @@ class MyHomePage extends StatefulWidget {
   MyHomePage({Key key}) : super(key: key);
 
   final SBBoxController sbBoxController = SBBoxController();
+  final SBCardController sbCardController = SBCardController();
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -32,14 +33,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    var cardViewData = <SBCardViewData>[
-      SBCardViewData('Card1', 'Path1'),
-      SBCardViewData('Card2', 'Path2'),
-      SBCardViewData('Card3', 'Path3'),
-      SBCardViewData('Card4', 'Path4'),
-      SBCardViewData('Card5', 'Path5'),
-    ];
-
     var dividerTheme = Theme.of(context).dividerTheme;
     var divider = VerticalDivider(
       color: dividerTheme.color,
@@ -56,7 +49,7 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           Expanded(child: widget.sbBoxController.createView()),
           divider,
-          Expanded(child: SBCardListView(cardViewData)),
+          Expanded(child: widget.sbCardController.createView()),
           divider,
           Expanded(
             child: Container(
