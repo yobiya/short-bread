@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 
 class ColumnSpaceLayoutView extends StatelessWidget {
-  final List<Widget> _contents;
+  final Iterable<Widget> _contents;
   final double _space;
   final double _paddingLeft;
   final double _paddingRight;
@@ -12,25 +12,14 @@ class ColumnSpaceLayoutView extends StatelessWidget {
   Widget build(BuildContext context) {
     var children = <Widget>[];
 
-    for (int i = 0; i < _contents.length; i++) {
-      if (i == 0) {
-        // 最初の要素
-        children.add(Padding(
-          padding: EdgeInsets.fromLTRB(_paddingLeft, _space, _paddingRight, _space),
-          child: _contents[i],
-        ));
-      } else if (i == _contents.length - 1) {
-        // 最後の要素
-        children.add(Padding(
-          padding: EdgeInsets.fromLTRB(_paddingLeft, 0, _paddingRight, _space),
-          child: _contents[i],
-        ));
-      } else {
-        children.add(Padding(
-          padding: EdgeInsets.fromLTRB(_paddingLeft, _space, _paddingRight, 0),
-          child: _contents[i],
-        ));
-      }
+    bool isFirstContent = true;
+    for (var content in _contents) {
+      double topPadding = isFirstContent ? _space : 0;
+
+      children.add(Padding(
+        padding: EdgeInsets.fromLTRB(_paddingLeft, topPadding, _paddingRight, _space),
+        child: content,
+      ));
     }
 
     children.add(Expanded(child: Container()));

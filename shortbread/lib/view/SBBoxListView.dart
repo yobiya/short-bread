@@ -16,7 +16,7 @@ class SBBoxListView extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       child: ColumnSpaceLayoutView(
-        _sbBoxViewDataList.map((data) => SBBoxView(data)).toList(),
+        _sbBoxViewDataList.map((data) => SBBoxView(data)),
         4,
         2,
         2,

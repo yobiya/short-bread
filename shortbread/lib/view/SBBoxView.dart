@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:shortbread/view-data/SBBoxViewData.dart';
 
 class SBBoxView extends StatelessWidget {
-  SBBoxViewData _viewData;
+  final SBBoxViewData _viewData;
 
   SBBoxView(this._viewData);
 
