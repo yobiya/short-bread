@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:shortbread/view-data/SBBoxViewData.dart';
 import 'package:shortbread/view/SBBoxListView.dart';
 
 void main() {
@@ -39,6 +40,12 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
+    List<SBBoxViewData> sbBoxViewDataList = [
+      SBBoxViewData('Box1', 'Description1'),
+      SBBoxViewData('Box2', 'Description2'),
+      SBBoxViewData('Box3', 'Description3'),
+    ];
+
     return Container(
       decoration: BoxDecoration(color: Theme.of(context).backgroundColor),
       padding: EdgeInsets.all(10),
