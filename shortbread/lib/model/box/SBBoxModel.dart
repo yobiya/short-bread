@@ -7,9 +7,9 @@ class SBBoxModel {
 
   SBBoxModel() {
     _viewData = [
-      SBBoxViewData('Box1', 'Description1'),
-      SBBoxViewData('Box2', 'Description2'),
-      SBBoxViewData('Box3', 'Description3'),
+      SBBoxViewData(1, 'Box1', 'Description1'),
+      SBBoxViewData(2, 'Box2', 'Description2'),
+      SBBoxViewData(3, 'Box3', 'Description3'),
     ];
   }
 }
