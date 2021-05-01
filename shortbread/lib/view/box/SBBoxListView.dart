@@ -5,16 +5,19 @@ import 'SBBoxView.dart';
 
 class SBBoxListView extends StatefulWidget {
   final Iterable<SBBoxViewData> _sbBoxViewDataList;
-  final void Function(int) onTapContent;
+  final int _focusBoxId;
+  final void Function(int) onSelectBox;
 
-  SBBoxListView(this._sbBoxViewDataList, {this.onTapContent});
+  SBBoxListView(this._sbBoxViewDataList, this._focusBoxId, {this.onSelectBox});
 
   @override
-  State<StatefulWidget> createState() => SBBoxListViewState();
+  State<StatefulWidget> createState() => SBBoxListViewState(_focusBoxId);
 }
 
 class SBBoxListViewState extends State<SBBoxListView> {
-  int _focusBoxId = 1;
+  int _focusBoxId;
+
+  SBBoxListViewState(this._focusBoxId);
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +40,7 @@ class SBBoxListViewState extends State<SBBoxListView> {
   }
 
   void onTapContent(int id) {
-    widget.onTapContent(id);
+    widget.onSelectBox(id);
 
     setState(() {
       _focusBoxId = id;
