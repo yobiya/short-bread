@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-
-import 'model/box/SBBoxModel.dart';
+import 'controller/box/SBBoxController.dart';
 import 'view-data/card/SBCardViewData.dart';
-import 'view/box/SBBoxListView.dart';
 import 'view/card/SBCardListView.dart';
 
 void main() {
@@ -25,6 +23,7 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key}) : super(key: key);
 
+  final SBBoxController sbBoxController = SBBoxController();
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -33,8 +32,6 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    var boxModel = SBBoxModel();
-
     var cardViewData = <SBCardViewData>[
       SBCardViewData('Card1', 'Path1'),
       SBCardViewData('Card2', 'Path2'),
@@ -57,7 +54,7 @@ class _MyHomePageState extends State<MyHomePage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Expanded(child: SBBoxListView(boxModel.getViewData())),
+          Expanded(child: widget.sbBoxController.createView()),
           divider,
           Expanded(child: SBCardListView(cardViewData)),
           divider,
