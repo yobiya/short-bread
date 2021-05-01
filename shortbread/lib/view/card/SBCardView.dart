@@ -4,12 +4,14 @@ import 'package:shortbread/view-data/card/SBCardViewData.dart';
 
 class SBCardView extends StatelessWidget {
   final SBCardViewData _viewData;
+  final bool _selected;
 
-  SBCardView(this._viewData);
+  SBCardView(this._viewData, this._selected);
 
   @override
   Widget build(BuildContext context) {
     return Card(
+      elevation: _selected ? 10 : Theme.of(context).cardTheme.elevation,
       child: Column(children: [
         Padding(
           padding: const EdgeInsets.all(8),

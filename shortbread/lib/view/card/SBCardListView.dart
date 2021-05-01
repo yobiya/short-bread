@@ -4,10 +4,24 @@ import 'package:shortbread/view-data/card/SBCardViewData.dart';
 import 'package:shortbread/view/ColumnSpaceLayoutView.dart';
 import 'package:shortbread/view/card/SBCardView.dart';
 
-class SBCardListView extends StatelessWidget {
+class SBCardListView extends StatefulWidget {
   final Iterable<SBCardViewData> _viewData;
 
   SBCardListView(this._viewData);
+
+  @override
+  State<StatefulWidget> createState() {
+    return SBCardListViewState(this._viewData);
+  }
+}
+
+class SBCardListViewState extends State<SBCardListView> {
+  Iterable<SBCardViewData> _viewData;
+  int _selectedId;
+
+  SBCardListViewState(this._viewData) {
+    _selectedId = _viewData.isNotEmpty ? _viewData.first.id : 0;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,10 +31,10 @@ class SBCardListView extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       child: ColumnSpaceLayoutView(
-        _viewData.map((data) => SBCardView(data)),
-        4,
-        2,
-        2,
+        widget._viewData.map((data) => SBCardView(data, data.id == _selectedId)),
+        8,
+        8,
+        8,
       ),
     );
   }
