@@ -31,11 +31,23 @@ class SBCardListViewState extends State<SBCardListView> {
         borderRadius: BorderRadius.circular(10),
       ),
       child: ColumnSpaceLayoutView(
-        widget._viewData.map((data) => SBCardView(data, data.id == _selectedId)),
+        widget._viewData.map(
+          (data) => SBCardView(
+            data,
+            data.id == _selectedId,
+            () => _selectCard(data.id),
+          ),
+        ),
         8,
         8,
         8,
       ),
     );
+  }
+
+  void _selectCard(int id) {
+    setState(() {
+      _selectedId = id;
+    });
   }
 }
