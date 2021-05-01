@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:shortbread/model/SBBoxModel.dart';
 import 'package:shortbread/view/SBBoxListView.dart';
+import 'package:shortbread/view/SBCardListView.dart';
 
 void main() {
   runApp(MyApp());
@@ -55,14 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
             indent: 10,
             endIndent: 10,
           ),
-          Expanded(
-            child: Container(
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(10),
-              ),
-            ),
-          ),
+          Expanded(child: SBCardListView()),
           VerticalDivider(
             color: Colors.grey,
             thickness: 1,
