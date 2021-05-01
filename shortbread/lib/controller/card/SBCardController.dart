@@ -8,6 +8,4 @@ class SBCardController {
   Widget createView(int boxId) {
     return SBCardListView(_cardModel.getViewData(boxId));
   }
-
-  void selectBox(int boxId) {}
 }

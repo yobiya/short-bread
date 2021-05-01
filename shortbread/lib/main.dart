@@ -23,17 +23,23 @@ class MainPage extends StatefulWidget {
   final SBBoxController sbBoxController = SBBoxController();
   final SBCardController sbCardController = SBCardController();
 
-  MainPage({Key key}) : super(key: key) {
-    sbBoxController.onChangedSelectedBox = sbCardController.selectBox;
-  }
+  MainPage({Key key}) : super(key: key);
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  _MyHomePageState createState() => _MyHomePageState(sbBoxController.selectedBoxId);
 }
 
 class _MyHomePageState extends State<MainPage> {
+  int _selectedBoxId;
+
+  _MyHomePageState(int selectedBoxId) {
+    _selectedBoxId = selectedBoxId;
+  }
+
   @override
   Widget build(BuildContext context) {
+    widget.sbBoxController.onChangedSelectedBox = _changedSelectedBox;
+
     var dividerTheme = Theme.of(context).dividerTheme;
     var divider = VerticalDivider(
       color: dividerTheme.color,
@@ -50,7 +56,7 @@ class _MyHomePageState extends State<MainPage> {
         children: [
           Expanded(child: widget.sbBoxController.createView()),
           divider,
-          Expanded(child: widget.sbCardController.createView(widget.sbBoxController.selectedBoxId)),
+          Expanded(child: widget.sbCardController.createView(_selectedBoxId)),
           divider,
           Expanded(
             child: Container(
@@ -63,5 +69,11 @@ class _MyHomePageState extends State<MainPage> {
         ],
       ),
     );
+  }
+
+  void _changedSelectedBox(int boxId) {
+    setState(() {
+      _selectedBoxId = boxId;
+    });
   }
 }
