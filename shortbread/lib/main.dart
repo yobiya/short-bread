@@ -40,7 +40,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    List<SBBoxViewData> sbBoxViewDataList = [
+    var sbBoxViewDataList = <SBBoxViewData>[
       SBBoxViewData('Box1', 'Description1'),
       SBBoxViewData('Box2', 'Description2'),
       SBBoxViewData('Box3', 'Description3'),
@@ -52,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Expanded(child: SBBoxListView()),
+          Expanded(child: SBBoxListView(sbBoxViewDataList)),
           VerticalDivider(
             color: Colors.grey,
             thickness: 1,

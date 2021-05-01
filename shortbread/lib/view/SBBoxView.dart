@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:shortbread/view-data/SBBoxViewData.dart';
 
 class SBBoxView extends StatelessWidget {
+  SBBoxViewData _viewData;
+
+  SBBoxView(this._viewData);
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -10,7 +15,7 @@ class SBBoxView extends StatelessWidget {
           child: Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              "Box",
+              _viewData.title,
               style: Theme.of(context).textTheme.subtitle1,
             ),
           ),
@@ -20,7 +25,7 @@ class SBBoxView extends StatelessWidget {
           child: Align(
             alignment: Alignment.center,
             child: Text(
-              "Description",
+              _viewData.description,
               style: Theme.of(context).textTheme.bodyText1,
             ),
           ),
