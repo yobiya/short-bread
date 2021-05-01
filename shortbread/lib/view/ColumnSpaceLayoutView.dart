@@ -12,14 +12,14 @@ class ColumnSpaceLayoutView extends StatelessWidget {
   Widget build(BuildContext context) {
     var children = <Widget>[];
 
-    bool isFirstContent = true;
+    double topPadding = _space;
     for (var content in _contents) {
-      double topPadding = isFirstContent ? _space : 0;
-
       children.add(Padding(
         padding: EdgeInsets.fromLTRB(_paddingLeft, topPadding, _paddingRight, _space),
         child: content,
       ));
+
+      topPadding = 0;
     }
 
     children.add(Expanded(child: Container()));
