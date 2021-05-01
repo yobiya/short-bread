@@ -5,6 +5,8 @@ class SBBoxView extends StatelessWidget {
   final SBBoxViewData _viewData;
   final GestureTapCallback onTap;
 
+  get id => _viewData.id;
+
   SBBoxView(this._viewData, {this.onTap});
 
   @override
@@ -37,4 +39,7 @@ class SBBoxView extends StatelessWidget {
       ),
     );
   }
+
+  void focus() {}
+  void unfocus() {}
 }
