@@ -1,7 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shortbread/view-data/SBCardViewData.dart';
 
 class SBCardView extends StatelessWidget {
+  final SBCardViewData _viewData;
+
+  SBCardView(this._viewData);
+
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -11,7 +16,7 @@ class SBCardView extends StatelessWidget {
           child: Align(
             alignment: Alignment.centerLeft,
             child: Text(
-              'Card',
+              _viewData.title,
               style: Theme.of(context).textTheme.subtitle1,
             ),
           ),
@@ -21,7 +26,7 @@ class SBCardView extends StatelessWidget {
           child: Align(
             alignment: Alignment.center,
             child: Text(
-              'Path',
+              _viewData.path,
               style: Theme.of(context).textTheme.bodyText1,
             ),
           ),

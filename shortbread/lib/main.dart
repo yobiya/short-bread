@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shortbread/model/SBBoxModel.dart';
+import 'package:shortbread/view-data/SBCardViewData.dart';
 import 'package:shortbread/view/SBBoxListView.dart';
 import 'package:shortbread/view/SBCardListView.dart';
 
@@ -43,6 +44,14 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     var boxModel = SBBoxModel();
 
+    var cardViewData = <SBCardViewData>[
+      SBCardViewData('Card1', 'Path1'),
+      SBCardViewData('Card2', 'Path2'),
+      SBCardViewData('Card3', 'Path3'),
+      SBCardViewData('Card4', 'Path4'),
+      SBCardViewData('Card5', 'Path5'),
+    ];
+
     var dividerTheme = Theme.of(context).dividerTheme;
     var divider = VerticalDivider(
       color: dividerTheme.color,
@@ -59,7 +68,7 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           Expanded(child: SBBoxListView(boxModel.getViewData())),
           divider,
-          Expanded(child: SBCardListView()),
+          Expanded(child: SBCardListView(cardViewData)),
           divider,
           Expanded(
             child: Container(
