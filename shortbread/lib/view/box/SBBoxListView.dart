@@ -3,11 +3,18 @@ import 'package:shortbread/view-data/box/SBBoxViewData.dart';
 import 'package:shortbread/view/ColumnSpaceLayoutView.dart';
 import 'SBBoxView.dart';
 
-class SBBoxListView extends StatelessWidget {
+class SBBoxListView extends StatefulWidget {
   final Iterable<SBBoxViewData> _sbBoxViewDataList;
   final void Function(int) onTapContent;
 
   SBBoxListView(this._sbBoxViewDataList, {this.onTapContent});
+
+  @override
+  State<StatefulWidget> createState() => SBBoxListViewState();
+}
+
+class SBBoxListViewState extends State<SBBoxListView> {
+  int _focusBoxId = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -17,14 +24,23 @@ class SBBoxListView extends StatelessWidget {
         borderRadius: BorderRadius.circular(10),
       ),
       child: ColumnSpaceLayoutView(
-        _sbBoxViewDataList.map((data) => SBBoxView(
+        widget._sbBoxViewDataList.map((data) => SBBoxView(
               data,
+              (_focusBoxId == data.id),
               onTap: () => onTapContent(data.id),
             )),
-        4,
-        2,
-        2,
+        8,
+        8,
+        8,
       ),
     );
+  }
+
+  void onTapContent(int id) {
+    widget.onTapContent(id);
+
+    setState(() {
+      _focusBoxId = id;
+    });
   }
 }
