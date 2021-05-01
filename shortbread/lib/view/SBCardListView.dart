@@ -8,7 +8,7 @@ class SBCardListView extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Theme.of(context).canvasColor,
+        color: Theme.of(context).scaffoldBackgroundColor,
         borderRadius: BorderRadius.circular(10),
       ),
       child: ColumnSpaceLayoutView(

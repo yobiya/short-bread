@@ -43,6 +43,14 @@ class _MyHomePageState extends State<MyHomePage> {
   Widget build(BuildContext context) {
     var boxModel = SBBoxModel();
 
+    var dividerTheme = Theme.of(context).dividerTheme;
+    var divider = VerticalDivider(
+      color: dividerTheme.color,
+      thickness: dividerTheme.thickness,
+      indent: dividerTheme.indent,
+      endIndent: dividerTheme.endIndent,
+    );
+
     return Container(
       decoration: BoxDecoration(color: Theme.of(context).backgroundColor),
       padding: EdgeInsets.all(10),
@@ -50,23 +58,13 @@ class _MyHomePageState extends State<MyHomePage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(child: SBBoxListView(boxModel.getViewData())),
-          VerticalDivider(
-            color: Colors.grey,
-            thickness: 1,
-            indent: 10,
-            endIndent: 10,
-          ),
+          divider,
           Expanded(child: SBCardListView()),
-          VerticalDivider(
-            color: Colors.grey,
-            thickness: 1,
-            indent: 10,
-            endIndent: 10,
-          ),
+          divider,
           Expanded(
             child: Container(
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Theme.of(context).scaffoldBackgroundColor,
                 borderRadius: BorderRadius.circular(10),
               ),
             ),
