@@ -26,7 +26,7 @@ class MainPage extends StatefulWidget {
   MainPage({Key key}) : super(key: key);
 
   @override
-  _MyHomePageState createState() => _MyHomePageState(sbBoxController.selectedBoxId);
+  _MyHomePageState createState() => _MyHomePageState(sbBoxController.selectedId);
 }
 
 class _MyHomePageState extends State<MainPage> {
