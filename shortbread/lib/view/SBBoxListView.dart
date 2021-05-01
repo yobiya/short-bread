@@ -4,7 +4,7 @@ import 'package:shortbread/view/SBBoxView.dart';
 import 'package:shortbread/view/ColumnSpaceLayoutView.dart';
 
 class SBBoxListView extends StatelessWidget {
-  final List<SBBoxViewData> _sbBoxViewDataList;
+  final Iterable<SBBoxViewData> _sbBoxViewDataList;
 
   SBBoxListView(this._sbBoxViewDataList);
 

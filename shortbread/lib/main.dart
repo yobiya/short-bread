@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:shortbread/view-data/SBBoxViewData.dart';
+import 'package:shortbread/model/SBBoxModel.dart';
 import 'package:shortbread/view/SBBoxListView.dart';
 
 void main() {
@@ -40,11 +40,7 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    var sbBoxViewDataList = <SBBoxViewData>[
-      SBBoxViewData('Box1', 'Description1'),
-      SBBoxViewData('Box2', 'Description2'),
-      SBBoxViewData('Box3', 'Description3'),
-    ];
+    var boxModel = SBBoxModel();
 
     return Container(
       decoration: BoxDecoration(color: Theme.of(context).backgroundColor),
@@ -52,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Expanded(child: SBBoxListView(sbBoxViewDataList)),
+          Expanded(child: SBBoxListView(boxModel.getViewData())),
           VerticalDivider(
             color: Colors.grey,
             thickness: 1,
