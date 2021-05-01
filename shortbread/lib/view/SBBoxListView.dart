@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shortbread/view/SBBoxView.dart';
-import 'package:shortbread/view/ExpandedSpace.dart';
+import 'package:shortbread/view/ColumnSpaceLayoutView.dart';
 
 class SBBoxListView extends StatelessWidget {
   @override
@@ -10,23 +10,16 @@ class SBBoxListView extends StatelessWidget {
         color: Colors.white,
         borderRadius: BorderRadius.circular(10),
       ),
-      child: _buildSBBoxesColumn(),
+      child: ColumnSpaceLayoutView(
+        [
+          SBBoxView(),
+          SBBoxView(),
+          SBBoxView(),
+        ],
+        4,
+        2,
+        2,
+      ),
     );
-  }
-
-  Column _buildSBBoxesColumn() {
-    var contents = <Widget>[];
-
-    contents.add(Padding(
-      padding: EdgeInsets.fromLTRB(4, 4, 4, 2),
-      child: SBBoxView(),
-    ));
-    contents.add(Padding(
-      padding: EdgeInsets.fromLTRB(4, 2, 4, 2),
-      child: SBBoxView(),
-    ));
-    contents.add(ExpandedSpace());
-
-    return Column(children: contents);
   }
 }
