@@ -3,17 +3,17 @@ import 'package:shortbread/view-data/box/SBBoxViewData.dart';
 
 class SBBoxView extends StatelessWidget {
   final SBBoxViewData _viewData;
-  final bool _focused;
+  final bool _selected;
   final GestureTapCallback onTap;
 
   get id => _viewData.id;
 
-  SBBoxView(this._viewData, this._focused, {this.onTap});
+  SBBoxView(this._viewData, this._selected, {this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: _focused ? 10 : Theme.of(context).cardTheme.elevation,
+      elevation: _selected ? 10 : Theme.of(context).cardTheme.elevation,
       child: InkWell(
         onTap: this.onTap,
         child: Column(children: [
@@ -41,7 +41,4 @@ class SBBoxView extends StatelessWidget {
       ),
     );
   }
-
-  void focus() {}
-  void unfocus() {}
 }

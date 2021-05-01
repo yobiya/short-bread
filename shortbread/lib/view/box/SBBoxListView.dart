@@ -5,19 +5,19 @@ import 'SBBoxView.dart';
 
 class SBBoxListView extends StatefulWidget {
   final Iterable<SBBoxViewData> _sbBoxViewDataList;
-  final int _focusBoxId;
+  final int _selectedId;
   final void Function(int) onSelectBox;
 
-  SBBoxListView(this._sbBoxViewDataList, this._focusBoxId, {this.onSelectBox});
+  SBBoxListView(this._sbBoxViewDataList, this._selectedId, {this.onSelectBox});
 
   @override
-  State<StatefulWidget> createState() => SBBoxListViewState(_focusBoxId);
+  State<StatefulWidget> createState() => SBBoxListViewState(_selectedId);
 }
 
 class SBBoxListViewState extends State<SBBoxListView> {
-  int _focusBoxId;
+  int _selectedId;
 
-  SBBoxListViewState(this._focusBoxId);
+  SBBoxListViewState(this._selectedId);
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class SBBoxListViewState extends State<SBBoxListView> {
       child: ColumnSpaceLayoutView(
         widget._sbBoxViewDataList.map((data) => SBBoxView(
               data,
-              (_focusBoxId == data.id),
+              (_selectedId == data.id),
               onTap: () => onTapContent(data.id),
             )),
         8,
@@ -43,7 +43,7 @@ class SBBoxListViewState extends State<SBBoxListView> {
     widget.onSelectBox(id);
 
     setState(() {
-      _focusBoxId = id;
+      _selectedId = id;
     });
   }
 }
