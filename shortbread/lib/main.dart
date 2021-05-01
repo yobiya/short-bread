@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'controller/box/SBBoxController.dart';
 import 'controller/card/SBCardController.dart';
-import 'view/card/SBCardListView.dart';
 
 void main() {
   runApp(MyApp());
@@ -21,10 +20,12 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key}) : super(key: key);
-
   final SBBoxController sbBoxController = SBBoxController();
   final SBCardController sbCardController = SBCardController();
+
+  MyHomePage({Key key}) : super(key: key) {
+    sbBoxController.onChangedSelectedBox = sbCardController.selectBox;
+  }
 
   @override
   _MyHomePageState createState() => _MyHomePageState();
@@ -49,7 +50,7 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           Expanded(child: widget.sbBoxController.createView()),
           divider,
-          Expanded(child: widget.sbCardController.createView()),
+          Expanded(child: widget.sbCardController.createView(widget.sbBoxController.selectedBoxId)),
           divider,
           Expanded(
             child: Container(

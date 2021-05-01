@@ -5,7 +5,9 @@ import 'package:shortbread/view/card/SBCardListView.dart';
 class SBCardController {
   SBCardModel _cardModel = SBCardModel();
 
-  Widget createView() {
-    return SBCardListView(_cardModel.getViewData());
+  Widget createView(int boxId) {
+    return SBCardListView(_cardModel.getViewData(boxId));
   }
+
+  void selectBox(int boxId) {}
 }

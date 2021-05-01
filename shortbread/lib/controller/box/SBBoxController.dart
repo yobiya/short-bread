@@ -4,20 +4,26 @@ import 'package:shortbread/view/box/SBBoxListView.dart';
 
 class SBBoxController {
   SBBoxModel _boxModel = SBBoxModel();
-  int _selectedBoxId;
+
+  int selectedBoxId;
+  void Function(int) onChangedSelectedBox = (id) {};
+
+  SBBoxController() {
+    var viewData = _boxModel.getViewData();
+    selectedBoxId = viewData.isNotEmpty ? viewData.first.id : 0;
+  }
 
   Widget createView() {
-    var viewData = _boxModel.getViewData();
-    _selectedBoxId = viewData.isNotEmpty ? viewData.first.id : 0;
-
     return SBBoxListView(
       _boxModel.getViewData(),
-      _selectedBoxId,
+      selectedBoxId,
       onSelectBox: _selectBox,
     );
   }
 
   void _selectBox(int id) {
-    _selectedBoxId = id;
+    selectedBoxId = id;
+
+    onChangedSelectedBox(id);
   }
 }
