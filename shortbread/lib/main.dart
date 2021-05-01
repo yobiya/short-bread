@@ -14,16 +14,16 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(),
+      home: MainPage(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
+class MainPage extends StatefulWidget {
   final SBBoxController sbBoxController = SBBoxController();
   final SBCardController sbCardController = SBCardController();
 
-  MyHomePage({Key key}) : super(key: key) {
+  MainPage({Key key}) : super(key: key) {
     sbBoxController.onChangedSelectedBox = sbCardController.selectBox;
   }
 
@@ -31,7 +31,7 @@ class MyHomePage extends StatefulWidget {
   _MyHomePageState createState() => _MyHomePageState();
 }
 
-class _MyHomePageState extends State<MyHomePage> {
+class _MyHomePageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     var dividerTheme = Theme.of(context).dividerTheme;
