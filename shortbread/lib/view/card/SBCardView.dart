@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shortbread/view-data/SBCardViewData.dart';
+import 'package:shortbread/view-data/card/SBCardViewData.dart';
 
 class SBCardView extends StatelessWidget {
   final SBCardViewData _viewData;

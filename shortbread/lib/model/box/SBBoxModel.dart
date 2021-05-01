@@ -1,4 +1,4 @@
-import 'package:shortbread/view-data/SBBoxViewData.dart';
+import 'package:shortbread/view-data/box/SBBoxViewData.dart';
 
 class SBBoxModel {
   List<SBBoxViewData> _viewData;

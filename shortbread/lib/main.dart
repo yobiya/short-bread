@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:shortbread/model/SBBoxModel.dart';
-import 'package:shortbread/view-data/SBCardViewData.dart';
-import 'package:shortbread/view/SBBoxListView.dart';
-import 'package:shortbread/view/SBCardListView.dart';
+
+import 'model/box/SBBoxModel.dart';
+import 'view-data/card/SBCardViewData.dart';
+import 'view/box/SBBoxListView.dart';
+import 'view/card/SBCardListView.dart';
 
 void main() {
   runApp(MyApp());

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:shortbread/view-data/SBBoxViewData.dart';
-import 'package:shortbread/view/SBBoxView.dart';
+import 'package:shortbread/view-data/box/SBBoxViewData.dart';
 import 'package:shortbread/view/ColumnSpaceLayoutView.dart';
+import 'SBBoxView.dart';
 
 class SBBoxListView extends StatelessWidget {
   final Iterable<SBBoxViewData> _sbBoxViewDataList;
