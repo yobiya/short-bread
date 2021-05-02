@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shortbread/model/box/SBBoxModel.dart';
+import 'package:shortbread/view-data/box/SBBoxViewData.dart';
 import 'package:shortbread/view/box/SBBoxListView.dart';
 
 class SBBoxController {
@@ -8,6 +9,7 @@ class SBBoxController {
   int selectedId;
   void Function(int) onChangedSelectedBox = (id) {};
   void Function(WidgetBuilder) showDialog = (builder) {};
+  void Function() closeDialog = () {};
 
   SBBoxController() {
     var viewData = _boxModel.getViewData();
@@ -64,7 +66,21 @@ class SBBoxController {
             ],
           ),
         ),
+        actions: [
+          TextButton(
+            onPressed: closeDialog,
+            child: Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: _closeDialogAndSave,
+            child: Text('OK'),
+          ),
+        ],
       );
     });
+  }
+
+  void _closeDialogAndSave() {
+    closeDialog();
   }
 }

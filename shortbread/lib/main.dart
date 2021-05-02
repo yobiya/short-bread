@@ -39,6 +39,7 @@ class _MyHomePageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     widget.sbBoxController.showDialog = _showDialog;
+    widget.sbBoxController.closeDialog = _closeDialog;
     widget.sbBoxController.onChangedSelectedBox = _changeSelectedBox;
 
     return Container(
@@ -66,6 +67,10 @@ class _MyHomePageState extends State<MainPage> {
 
   void _showDialog(WidgetBuilder dialogBuilder) {
     showDialog(context: context, builder: dialogBuilder);
+  }
+
+  void _closeDialog() {
+    Navigator.of(context).pop(context);
   }
 
   void _changeSelectedBox(int boxId) {
