@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shortbread/view-data/box/SBBoxViewData.dart';
 
@@ -17,12 +18,26 @@ class SBBoxView extends StatelessWidget {
         child: Column(children: [
           Padding(
             padding: const EdgeInsets.all(8),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                _viewData.title,
-                style: Theme.of(context).textTheme.subtitle1,
-              ),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Align(
+                    alignment: Alignment.topLeft,
+                    child: Text(
+                      _viewData.title,
+                      style: Theme.of(context).textTheme.subtitle1,
+                    ),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.topRight,
+                  child: CupertinoButton(
+                    padding: EdgeInsets.all(4),
+                    child: Icon(Icons.edit),
+                    onPressed: () {},
+                  ),
+                ),
+              ],
             ),
           ),
           Padding(
