@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'common/utility/Delegate.dart';
 import 'controller/box/SBBoxController.dart';
 import 'controller/card/SBCardController.dart';
 import 'model/box/SBBoxModel.dart';
@@ -37,9 +38,12 @@ class _MainPageController extends State<MainPage> {
     var boxViewData = _boxModel.getViewData();
     int startSelectedBoxId = boxViewData.isEmpty ? 0 : boxViewData.first.id;
 
-    var sbBoxControllerView = SBBoxControllerView(_boxModel, startSelectedBoxId);
+    var onChangedBoxId = Delegate<int>();
 
-    var cardControllerDelegates = SBCardControllerDelegates();
+    var boxControllerDeleagets = SBBoxControllerDeleagets(onChangedBoxId);
+    var sbBoxControllerView = SBBoxControllerView(boxControllerDeleagets, _boxModel, startSelectedBoxId);
+
+    var cardControllerDelegates = SBCardControllerDelegates(onChangedBoxId);
     var sbCardControllerView = SBCardControllerView(cardControllerDelegates, _cardModel, startSelectedBoxId);
 
     return Container(

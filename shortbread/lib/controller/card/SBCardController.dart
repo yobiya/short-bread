@@ -1,9 +1,12 @@
 import 'package:flutter/widgets.dart';
+import 'package:shortbread/common/utility/Delegate.dart';
 import 'package:shortbread/model/card/SBCardModel.dart';
 import 'package:shortbread/view/card/SBCardListView.dart';
 
 class SBCardControllerDelegates {
-  SBCardControllerDelegates();
+  final Delegate<int> onChangedBoxId;
+
+  SBCardControllerDelegates(this.onChangedBoxId);
 }
 
 class SBCardControllerView extends StatefulWidget {
@@ -15,17 +18,24 @@ class SBCardControllerView extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return SBCardController(_startSelectedBoxId);
+    return SBCardController(_delegates, _startSelectedBoxId);
   }
 }
 
 class SBCardController extends State<SBCardControllerView> {
-  final int _startSelectedBoxId;
+  final SBCardControllerDelegates _delegates;
+  int _selectedBoxId;
 
-  SBCardController(this._startSelectedBoxId);
+  SBCardController(this._delegates, this._selectedBoxId) {
+    _delegates.onChangedBoxId.addReceiver((boxId) {
+      setState(() {
+        _selectedBoxId = boxId;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return SBCardListView(widget._cardModel.getViewData(_startSelectedBoxId));
+    return SBCardListView(widget._cardModel.getViewData(_selectedBoxId));
   }
 }
