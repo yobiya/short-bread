@@ -32,8 +32,13 @@ class MainPage extends StatefulWidget {
 
 class _MainPageController extends State<MainPage> {
   final FileModel _fileModel = FileModel();
-  final SBBoxModel _boxModel = SBBoxModel();
-  final SBCardModel _cardModel = SBCardModel();
+  SBBoxModel _boxModel;
+  SBCardModel _cardModel;
+
+  _MainPageController() {
+    _boxModel = SBBoxModel(_fileModel);
+    _cardModel = SBCardModel();
+  }
 
   @override
   Widget build(BuildContext context) {

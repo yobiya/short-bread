@@ -1,5 +1,7 @@
 import 'dart:io';
 
+import 'package:shortbread/view-data/box/SBBoxViewData.dart';
+
 class FileModel {
   Directory _rootDirectory;
   Directory _boxDirectory;
@@ -13,5 +15,12 @@ class FileModel {
     _rootDirectory.createSync();
     _boxDirectory.createSync();
     _cardDirectory.createSync();
+  }
+
+  void writeBox(SBBoxViewData data) {
+    var path = _boxDirectory.path + '/box-${data.id}.json';
+    var file = File(path);
+
+    file.writeAsStringSync(data.toJson());
   }
 }
