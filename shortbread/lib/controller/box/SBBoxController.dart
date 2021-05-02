@@ -38,6 +38,7 @@ class SBBoxController {
         title: Text('Edit box'),
         content: Container(
           width: 400,
+          height: 420,
           child: Column(
             children: [
               TextField(
@@ -49,12 +50,16 @@ class SBBoxController {
                 controller: TextEditingController(text: data.title),
               ),
               Container(height: 20),
-              TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Description',
+              Scrollbar(
+                child: TextField(
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(),
+                    labelText: 'Description',
+                  ),
+                  controller: TextEditingController(text: data.description),
+                  keyboardType: TextInputType.multiline,
+                  maxLines: 12,
                 ),
-                controller: TextEditingController(text: data.description),
               ),
             ],
           ),
