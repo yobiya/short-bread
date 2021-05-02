@@ -1,0 +1,9 @@
+@startuml
+
+title 基礎設計
+
+class StatelessWidget
+class StatefullWidget
+class State<StatefullWidget>
+
+@enduml
