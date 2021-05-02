@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shortbread/common/utility/Delegate.dart';
 import 'package:shortbread/model/box/SBBoxModel.dart';
+import 'package:shortbread/view/box/SBBoxEditDialogView.dart';
 import 'package:shortbread/view/box/SBBoxListView.dart';
 
 class SBBoxControllerDeleagets {
@@ -51,49 +52,11 @@ class SBBoxController extends State<SBBoxControllerView> {
     showDialog(
         context: context,
         builder: (context) {
-          var viewData = widget._boxModel.getViewData();
-          var data = viewData.singleWhere((data) => data.id == id);
-
-          return AlertDialog(
-            title: Text('Edit box'),
-            content: Container(
-              width: 400,
-              height: 420,
-              child: Column(
-                children: [
-                  TextField(
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Title',
-                    ),
-                    minLines: 1,
-                    controller: TextEditingController(text: data.title),
-                  ),
-                  Container(height: 20),
-                  Scrollbar(
-                    child: TextField(
-                      decoration: InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Description',
-                      ),
-                      controller: TextEditingController(text: data.description),
-                      keyboardType: TextInputType.multiline,
-                      maxLines: 12,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            actions: [
-              TextButton(
-                onPressed: _closeDialog,
-                child: Text('Cancel'),
-              ),
-              TextButton(
-                onPressed: _closeDialogAndSave,
-                child: Text('OK'),
-              ),
-            ],
+          var viewData = widget._boxModel.getViewData().singleWhere((data) => data.id == id);
+          return SBBoxEditDialogView(
+            viewData,
+            _closeDialog,
+            _closeDialogAndSave,
           );
         });
   }
@@ -102,7 +65,7 @@ class SBBoxController extends State<SBBoxControllerView> {
     Navigator.of(context).pop(context);
   }
 
-  void _closeDialogAndSave() {
+  void _closeDialogAndSave(String title, String description) {
     _closeDialog();
   }
 }
