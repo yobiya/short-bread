@@ -6,11 +6,7 @@ class SBBoxModel {
   List<SBBoxViewData> _viewData;
 
   SBBoxModel(this._fileModel) {
-    _viewData = [
-      SBBoxViewData(1, 'Box1', 'Description1'),
-      SBBoxViewData(2, 'Box2', 'Description2'),
-      SBBoxViewData(3, 'Box3', 'Description3'),
-    ];
+    _viewData = _fileModel.readBoxes().toList();
   }
 
   Iterable<SBBoxViewData> getViewData() => _viewData;

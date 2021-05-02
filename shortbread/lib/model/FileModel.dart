@@ -17,6 +17,14 @@ class FileModel {
     _cardDirectory.createSync();
   }
 
+  Iterable<SBBoxViewData> readBoxes() {
+    return _boxDirectory.listSync().map((entity) {
+      var file = File(entity.path);
+      var json = file.readAsStringSync();
+      return SBBoxViewData.json(json);
+    });
+  }
+
   void writeBox(SBBoxViewData data) {
     var path = _boxDirectory.path + '/box-${data.id}.json';
     var file = File(path);
