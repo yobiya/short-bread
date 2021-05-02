@@ -20,8 +20,6 @@ class MyApp extends StatelessWidget {
 }
 
 class MainPage extends StatefulWidget {
-  final SBCardController sbCardController = SBCardController();
-
   MainPage({Key key}) : super(key: key);
 
   @override
@@ -32,6 +30,7 @@ class _MainPageController extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     var sbBoxControllerView = SBBoxControllerView();
+    var sbCardControllerView = SBCardControllerView();
 
     return Container(
       decoration: BoxDecoration(color: Theme.of(context).backgroundColor),
@@ -41,7 +40,7 @@ class _MainPageController extends State<MainPage> {
         children: [
           Expanded(child: sbBoxControllerView),
           VerticalDivider(),
-          Expanded(child: widget.sbCardController.createView(1)),
+          Expanded(child: sbCardControllerView),
           VerticalDivider(),
           Expanded(
             child: Container(
