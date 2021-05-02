@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shortbread/common/utility/CollectionUtility.dart';
 import 'package:shortbread/view-data/card/SBCardViewData.dart';
 import 'package:shortbread/view/ColumnSpaceLayoutView.dart';
 import 'package:shortbread/view/card/SBCardView.dart';
@@ -30,19 +31,26 @@ class SBCardListViewState extends State<SBCardListView> {
         color: Theme.of(context).scaffoldBackgroundColor,
         borderRadius: BorderRadius.circular(10),
       ),
-      child: ColumnSpaceLayoutView(
-        widget._viewData.map(
-          (data) => SBCardView(
-            data,
-            data.id == _selectedId,
-            () => _selectCard(data.id),
-          ),
+      child: Scrollbar(
+        child: ListView(
+          padding: EdgeInsets.all(8),
+          children: _buildContents(),
         ),
-        8,
-        8,
-        8,
       ),
     );
+  }
+
+  List<Widget> _buildContents() {
+    var boxViewCollection = widget._viewData.map((data) => SBCardView(
+          data,
+          (_selectedId == data.id),
+          () => _selectCard(data.id),
+        ));
+
+    return CollectionUtility.insertBetweenAll(
+      boxViewCollection,
+      Container(height: 8),
+    ).toList();
   }
 
   void _selectCard(int id) {
