@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'common/utility/Delegate.dart';
 import 'controller/box/SBBoxController.dart';
 import 'controller/card/SBCardController.dart';
+import 'model/FileModel.dart';
 import 'model/box/SBBoxModel.dart';
 import 'model/card/SBCardModel.dart';
 
@@ -30,6 +31,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageController extends State<MainPage> {
+  final FileModel _fileModel = FileModel();
   final SBBoxModel _boxModel = SBBoxModel();
   final SBCardModel _cardModel = SBCardModel();
 
