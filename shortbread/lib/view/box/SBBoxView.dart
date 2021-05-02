@@ -6,8 +6,6 @@ class SBBoxView extends StatelessWidget {
   final bool _selected;
   final GestureTapCallback _onSelect;
 
-  get id => _viewData.id;
-
   SBBoxView(this._viewData, this._selected, this._onSelect);
 
   @override
