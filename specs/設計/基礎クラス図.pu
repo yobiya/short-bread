@@ -8,11 +8,28 @@ class State<StatefullWidget>
 class Model
 class View
 class Controller
+class ControllerView
+class Delegate
+class Delegates
 
 StatelessWidget <|-- View
+StatefullWidget <|- ControllerView
 StatefullWidget *-- State
 State <|-- Controller
 Controller *-- Model
 Controller *-- View
+Delegates *-- Delegate
+Controller o-- Delegates
+
+note right of Controller
+  Stateのみが状態の変更により
+  表示を更新できるため
+  ControllerはStateを継承する
+end note
+
+note right of Delegate
+  Controller間のやり取りは
+  Delegateで行う
+end note
 
 @enduml
