@@ -40,14 +40,6 @@ class _MyHomePageState extends State<MainPage> {
   Widget build(BuildContext context) {
     widget.sbBoxController.onChangedSelectedBox = _changedSelectedBox;
 
-    var dividerTheme = Theme.of(context).dividerTheme;
-    var divider = VerticalDivider(
-      color: dividerTheme.color,
-      thickness: dividerTheme.thickness,
-      indent: dividerTheme.indent,
-      endIndent: dividerTheme.endIndent,
-    );
-
     return Container(
       decoration: BoxDecoration(color: Theme.of(context).backgroundColor),
       padding: EdgeInsets.all(10),
@@ -55,9 +47,9 @@ class _MyHomePageState extends State<MainPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(child: widget.sbBoxController.createView()),
-          divider,
+          VerticalDivider(),
           Expanded(child: widget.sbCardController.createView(_selectedBoxId)),
-          divider,
+          VerticalDivider(),
           Expanded(
             child: Container(
               decoration: BoxDecoration(
