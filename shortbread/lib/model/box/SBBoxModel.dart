@@ -3,13 +3,19 @@ import 'package:shortbread/view-data/box/SBBoxViewData.dart';
 class SBBoxModel {
   List<SBBoxViewData> _viewData;
 
-  Iterable<SBBoxViewData> getViewData() => _viewData;
-
   SBBoxModel() {
     _viewData = [
       SBBoxViewData(1, 'Box1', 'Description1'),
       SBBoxViewData(2, 'Box2', 'Description2'),
       SBBoxViewData(3, 'Box3', 'Description3'),
     ];
+  }
+
+  Iterable<SBBoxViewData> getViewData() => _viewData;
+
+  void setViewData(SBBoxViewData viewData) {
+    var targetViewData = _viewData.singleWhere((data) => data.id == viewData.id);
+    targetViewData.title = viewData.title;
+    targetViewData.description = viewData.description;
   }
 }

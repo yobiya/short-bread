@@ -5,14 +5,13 @@ import 'package:shortbread/view-data/box/SBBoxViewData.dart';
 class SBBoxEditDialogView extends StatelessWidget {
   final SBBoxViewData _viewData;
   final void Function() _onCancel;
-  final void Function(String, String) _onDecide;
+  final void Function(SBBoxViewData) _onDecide;
 
   SBBoxEditDialogView(this._viewData, this._onCancel, this._onDecide);
 
   @override
   Widget build(BuildContext context) {
-    String _title = _viewData.title;
-    String _description = _viewData.description;
+    var edittingViewData = SBBoxViewData(_viewData.id, _viewData.title, _viewData.description);
 
     return AlertDialog(
       title: Text('Edit box'),
@@ -28,7 +27,7 @@ class SBBoxEditDialogView extends StatelessWidget {
               ),
               minLines: 1,
               controller: TextEditingController(text: _viewData.title),
-              onChanged: (text) => _title = text,
+              onChanged: (text) => edittingViewData.title = text,
             ),
             Container(height: 20),
             Scrollbar(
@@ -40,7 +39,7 @@ class SBBoxEditDialogView extends StatelessWidget {
                 controller: TextEditingController(text: _viewData.description),
                 keyboardType: TextInputType.multiline,
                 maxLines: 12,
-                onChanged: (text) => _description = text,
+                onChanged: (text) => edittingViewData.description = text,
               ),
             ),
           ],
@@ -52,7 +51,7 @@ class SBBoxEditDialogView extends StatelessWidget {
           child: Text('Cancel'),
         ),
         TextButton(
-          onPressed: () => _onDecide(_title, _description),
+          onPressed: () => _onDecide(edittingViewData),
           child: Text('OK'),
         ),
       ],
