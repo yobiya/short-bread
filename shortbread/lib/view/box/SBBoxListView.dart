@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shortbread/common/utility/CollectionUtility.dart';
 import 'package:shortbread/view-data/box/SBBoxViewData.dart';
-import 'package:shortbread/view/ColumnSpaceLayoutView.dart';
 import 'SBBoxView.dart';
 
 class SBBoxListView extends StatefulWidget {
@@ -26,20 +26,29 @@ class SBBoxListViewState extends State<SBBoxListView> {
         color: Theme.of(context).scaffoldBackgroundColor,
         borderRadius: BorderRadius.circular(10),
       ),
-      child: ColumnSpaceLayoutView(
-        widget._sbBoxViewDataList.map((data) => SBBoxView(
-              data,
-              (_selectedId == data.id),
-              onTap: () => onTapContent(data.id),
-            )),
-        8,
-        8,
-        8,
+      child: Scrollbar(
+        child: ListView(
+          padding: EdgeInsets.all(8),
+          children: _buildContents(),
+        ),
       ),
     );
   }
 
-  void onTapContent(int id) {
+  List<Widget> _buildContents() {
+    var boxViewCollection = widget._sbBoxViewDataList.map((data) => SBBoxView(
+          data,
+          (_selectedId == data.id),
+          onTap: () => _onTapContent(data.id),
+        ));
+
+    return CollectionUtility.insertBetweenAll(
+      boxViewCollection,
+      Container(height: 8),
+    ).toList();
+  }
+
+  void _onTapContent(int id) {
     widget.onSelectBox(id);
 
     setState(() {
