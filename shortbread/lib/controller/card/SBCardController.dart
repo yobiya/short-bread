@@ -36,6 +36,6 @@ class SBCardController extends State<SBCardControllerView> {
 
   @override
   Widget build(BuildContext context) {
-    return SBCardListView(widget._cardModel.getViewData(_selectedBoxId));
+    return SBCardListView(widget._cardModel.getDataCollection(_selectedBoxId));
   }
 }

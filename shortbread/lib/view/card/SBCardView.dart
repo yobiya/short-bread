@@ -1,13 +1,13 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shortbread/view-data/card/SBCardViewData.dart';
+import 'package:shortbread/data/card/SBCardData.dart';
 
 class SBCardView extends StatelessWidget {
-  final SBCardViewData _viewData;
+  final SBCardData _data;
   final bool _selected;
   final void Function() _onSelect;
 
-  SBCardView(this._viewData, this._selected, this._onSelect);
+  SBCardView(this._data, this._selected, this._onSelect);
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +21,7 @@ class SBCardView extends StatelessWidget {
             child: Align(
               alignment: Alignment.centerLeft,
               child: Text(
-                _viewData.title,
+                _data.title,
                 style: Theme.of(context).textTheme.subtitle1,
               ),
             ),
@@ -31,7 +31,7 @@ class SBCardView extends StatelessWidget {
             child: Align(
               alignment: Alignment.center,
               child: Text(
-                _viewData.path,
+                _data.path,
                 style: Theme.of(context).textTheme.bodyText1,
               ),
             ),
