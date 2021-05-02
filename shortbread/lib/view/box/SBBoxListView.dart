@@ -7,8 +7,14 @@ class SBBoxListView extends StatefulWidget {
   final Iterable<SBBoxViewData> _viewData;
   final int _selectedId;
   final void Function(int) onSelectBox;
+  final void Function(int) onRequestEdit;
 
-  SBBoxListView(this._viewData, this._selectedId, this.onSelectBox);
+  SBBoxListView(
+    this._viewData,
+    this._selectedId,
+    this.onSelectBox,
+    this.onRequestEdit,
+  );
 
   @override
   State<StatefulWidget> createState() => SBBoxListViewState(_selectedId);
@@ -40,6 +46,7 @@ class SBBoxListViewState extends State<SBBoxListView> {
           data,
           (_selectedId == data.id),
           () => _selectBox(data.id),
+          () => widget.onRequestEdit(data.id),
         ));
 
     return CollectionUtility.insertBetweenAll(

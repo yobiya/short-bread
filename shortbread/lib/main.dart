@@ -38,7 +38,8 @@ class _MyHomePageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    widget.sbBoxController.onChangedSelectedBox = _changedSelectedBox;
+    widget.sbBoxController.showDialog = _showDialog;
+    widget.sbBoxController.onChangedSelectedBox = _changeSelectedBox;
 
     return Container(
       decoration: BoxDecoration(color: Theme.of(context).backgroundColor),
@@ -46,7 +47,7 @@ class _MyHomePageState extends State<MainPage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Expanded(child: widget.sbBoxController.createView()),
+          Expanded(child: widget.sbBoxController.buildView()),
           VerticalDivider(),
           Expanded(child: widget.sbCardController.createView(_selectedBoxId)),
           VerticalDivider(),
@@ -63,7 +64,11 @@ class _MyHomePageState extends State<MainPage> {
     );
   }
 
-  void _changedSelectedBox(int boxId) {
+  void _showDialog(WidgetBuilder dialogBuilder) {
+    showDialog(context: context, builder: dialogBuilder);
+  }
+
+  void _changeSelectedBox(int boxId) {
     setState(() {
       _selectedBoxId = boxId;
     });

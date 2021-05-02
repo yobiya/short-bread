@@ -6,8 +6,14 @@ class SBBoxView extends StatelessWidget {
   final SBBoxViewData _viewData;
   final bool _selected;
   final GestureTapCallback _onSelect;
+  final VoidCallback _onTapEditButton;
 
-  SBBoxView(this._viewData, this._selected, this._onSelect);
+  SBBoxView(
+    this._viewData,
+    this._selected,
+    this._onSelect,
+    this._onTapEditButton,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +43,7 @@ class SBBoxView extends StatelessWidget {
                   child: CupertinoButton(
                     padding: EdgeInsets.all(4),
                     child: Icon(Icons.edit),
-                    onPressed: () {},
+                    onPressed: _onTapEditButton,
                   ),
                 ),
               ],
