@@ -5,5 +5,14 @@ title 基礎設計
 class StatelessWidget
 class StatefullWidget
 class State<StatefullWidget>
+class Model
+class View
+class Controller
+
+StatelessWidget <|-- View
+StatefullWidget *-- State
+State <|-- Controller
+Controller *-- Model
+Controller *-- View
 
 @enduml
