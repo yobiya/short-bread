@@ -4,7 +4,14 @@ import 'package:shortbread/model/box/SBBoxModel.dart';
 import 'package:shortbread/view-data/box/SBBoxViewData.dart';
 import 'package:shortbread/view/box/SBBoxListView.dart';
 
-class SBBoxController {
+class SBBoxControllerView extends StatefulWidget {
+  @override
+  State<StatefulWidget> createState() {
+    return SBBoxController();
+  }
+}
+
+class SBBoxController extends State<SBBoxControllerView> {
   SBBoxModel _boxModel = SBBoxModel();
   int selectedId;
   void Function(int) onChangedSelectedBox = (id) {};
@@ -16,7 +23,8 @@ class SBBoxController {
     selectedId = viewData.isNotEmpty ? viewData.first.id : 0;
   }
 
-  Widget buildView() {
+  @override
+  Widget build(BuildContext context) {
     return SBBoxListView(
       _boxModel.getViewData(),
       selectedId,

@@ -20,27 +20,18 @@ class MyApp extends StatelessWidget {
 }
 
 class MainPage extends StatefulWidget {
-  final SBBoxController sbBoxController = SBBoxController();
   final SBCardController sbCardController = SBCardController();
 
   MainPage({Key key}) : super(key: key);
 
   @override
-  _MyHomePageState createState() => _MyHomePageState(sbBoxController.selectedId);
+  _MainPageController createState() => _MainPageController();
 }
 
-class _MyHomePageState extends State<MainPage> {
-  int _selectedBoxId;
-
-  _MyHomePageState(int selectedBoxId) {
-    _selectedBoxId = selectedBoxId;
-  }
-
+class _MainPageController extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
-    widget.sbBoxController.showDialog = _showDialog;
-    widget.sbBoxController.closeDialog = _closeDialog;
-    widget.sbBoxController.onChangedSelectedBox = _changeSelectedBox;
+    var sbBoxControllerView = SBBoxControllerView();
 
     return Container(
       decoration: BoxDecoration(color: Theme.of(context).backgroundColor),
@@ -48,9 +39,9 @@ class _MyHomePageState extends State<MainPage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Expanded(child: widget.sbBoxController.buildView()),
+          Expanded(child: sbBoxControllerView),
           VerticalDivider(),
-          Expanded(child: widget.sbCardController.createView(_selectedBoxId)),
+          Expanded(child: widget.sbCardController.createView(1)),
           VerticalDivider(),
           Expanded(
             child: Container(
@@ -63,19 +54,5 @@ class _MyHomePageState extends State<MainPage> {
         ],
       ),
     );
-  }
-
-  void _showDialog(WidgetBuilder dialogBuilder) {
-    showDialog(context: context, builder: dialogBuilder);
-  }
-
-  void _closeDialog() {
-    Navigator.of(context).pop(context);
-  }
-
-  void _changeSelectedBox(int boxId) {
-    setState(() {
-      _selectedBoxId = boxId;
-    });
   }
 }
