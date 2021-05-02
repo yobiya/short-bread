@@ -21,11 +21,14 @@ class SBBoxView extends StatelessWidget {
             child: Row(
               children: [
                 Expanded(
-                  child: Align(
-                    alignment: Alignment.topLeft,
-                    child: Text(
-                      _viewData.title,
-                      style: Theme.of(context).textTheme.subtitle1,
+                  child: Container(
+                    height: 42,
+                    child: Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        _viewData.title,
+                        style: Theme.of(context).textTheme.subtitle1,
+                      ),
                     ),
                   ),
                 ),
