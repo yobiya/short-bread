@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'controller/box/SBBoxController.dart';
 import 'controller/card/SBCardController.dart';
+import 'model/box/SBBoxModel.dart';
+import 'model/card/SBCardModel.dart';
 
 void main() {
   runApp(MyApp());
@@ -27,10 +29,18 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageController extends State<MainPage> {
+  final SBBoxModel _boxModel = SBBoxModel();
+  final SBCardModel _cardModel = SBCardModel();
+
   @override
   Widget build(BuildContext context) {
-    var sbBoxControllerView = SBBoxControllerView();
-    var sbCardControllerView = SBCardControllerView();
+    var boxViewData = _boxModel.getViewData();
+    int startSelectedBoxId = boxViewData.isEmpty ? 0 : boxViewData.first.id;
+
+    var sbBoxControllerView = SBBoxControllerView(_boxModel, startSelectedBoxId);
+
+    var cardControllerDelegates = SBCardControllerDelegates();
+    var sbCardControllerView = SBCardControllerView(cardControllerDelegates, _cardModel, startSelectedBoxId);
 
     return Container(
       decoration: BoxDecoration(color: Theme.of(context).backgroundColor),

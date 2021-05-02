@@ -3,7 +3,7 @@ import 'package:shortbread/common/utility/CollectionUtility.dart';
 import 'package:shortbread/view-data/box/SBBoxViewData.dart';
 import 'SBBoxView.dart';
 
-class SBBoxListView extends StatefulWidget {
+class SBBoxListView extends StatelessWidget {
   final Iterable<SBBoxViewData> _viewData;
   final int _selectedId;
   final void Function(int) onSelectBox;
@@ -15,15 +15,6 @@ class SBBoxListView extends StatefulWidget {
     this.onSelectBox,
     this.onRequestEdit,
   );
-
-  @override
-  State<StatefulWidget> createState() => SBBoxListViewState(_selectedId);
-}
-
-class SBBoxListViewState extends State<SBBoxListView> {
-  int _selectedId;
-
-  SBBoxListViewState(this._selectedId);
 
   @override
   Widget build(BuildContext context) {
@@ -42,24 +33,16 @@ class SBBoxListViewState extends State<SBBoxListView> {
   }
 
   List<Widget> _buildContents() {
-    var boxViewCollection = widget._viewData.map((data) => SBBoxView(
+    var boxViewCollection = _viewData.map((data) => SBBoxView(
           data,
           (_selectedId == data.id),
-          () => _selectBox(data.id),
-          () => widget.onRequestEdit(data.id),
+          () => onSelectBox(data.id),
+          () => onRequestEdit(data.id),
         ));
 
     return CollectionUtility.insertBetweenAll(
       boxViewCollection,
       Container(height: 8),
     ).toList();
-  }
-
-  void _selectBox(int id) {
-    widget.onSelectBox(id);
-
-    setState(() {
-      _selectedId = id;
-    });
   }
 }

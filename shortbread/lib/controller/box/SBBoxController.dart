@@ -4,26 +4,27 @@ import 'package:shortbread/model/box/SBBoxModel.dart';
 import 'package:shortbread/view/box/SBBoxListView.dart';
 
 class SBBoxControllerView extends StatefulWidget {
+  final SBBoxModel _boxModel;
+  final int _startSelectedId;
+
+  SBBoxControllerView(this._boxModel, this._startSelectedId);
+
   @override
   State<StatefulWidget> createState() {
-    return SBBoxController();
+    return SBBoxController(_startSelectedId);
   }
 }
 
 class SBBoxController extends State<SBBoxControllerView> {
-  SBBoxModel _boxModel = SBBoxModel();
-  int selectedId;
+  int _selectedId;
 
-  SBBoxController() {
-    var viewData = _boxModel.getViewData();
-    selectedId = viewData.isNotEmpty ? viewData.first.id : 0;
-  }
+  SBBoxController(this._selectedId);
 
   @override
   Widget build(BuildContext context) {
     return SBBoxListView(
-      _boxModel.getViewData(),
-      selectedId,
+      widget._boxModel.getViewData(),
+      _selectedId,
       _selectBox,
       _showEditDialog,
     );
@@ -31,7 +32,7 @@ class SBBoxController extends State<SBBoxControllerView> {
 
   void _selectBox(int id) {
     setState(() {
-      selectedId = id;
+      _selectedId = id;
     });
   }
 
@@ -39,7 +40,7 @@ class SBBoxController extends State<SBBoxControllerView> {
     showDialog(
         context: context,
         builder: (context) {
-          var viewData = _boxModel.getViewData();
+          var viewData = widget._boxModel.getViewData();
           var data = viewData.singleWhere((data) => data.id == id);
 
           return AlertDialog(
