@@ -4,11 +4,11 @@ import 'package:shortbread/view-data/box/SBBoxViewData.dart';
 import 'SBBoxView.dart';
 
 class SBBoxListView extends StatefulWidget {
-  final Iterable<SBBoxViewData> _sbBoxViewDataList;
+  final Iterable<SBBoxViewData> _viewData;
   final int _selectedId;
   final void Function(int) onSelectBox;
 
-  SBBoxListView(this._sbBoxViewDataList, this._selectedId, {this.onSelectBox});
+  SBBoxListView(this._viewData, this._selectedId, this.onSelectBox);
 
   @override
   State<StatefulWidget> createState() => SBBoxListViewState(_selectedId);
@@ -36,10 +36,10 @@ class SBBoxListViewState extends State<SBBoxListView> {
   }
 
   List<Widget> _buildContents() {
-    var boxViewCollection = widget._sbBoxViewDataList.map((data) => SBBoxView(
+    var boxViewCollection = widget._viewData.map((data) => SBBoxView(
           data,
           (_selectedId == data.id),
-          onTap: () => _onTapContent(data.id),
+          () => _selectBox(data.id),
         ));
 
     return CollectionUtility.insertBetweenAll(
@@ -48,7 +48,7 @@ class SBBoxListViewState extends State<SBBoxListView> {
     ).toList();
   }
 
-  void _onTapContent(int id) {
+  void _selectBox(int id) {
     widget.onSelectBox(id);
 
     setState(() {

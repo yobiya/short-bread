@@ -16,7 +16,7 @@ class SBBoxController {
     return SBBoxListView(
       _boxModel.getViewData(),
       selectedId,
-      onSelectBox: _selectBox,
+      _selectBox,
     );
   }
 

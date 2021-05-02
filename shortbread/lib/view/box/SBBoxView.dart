@@ -4,18 +4,18 @@ import 'package:shortbread/view-data/box/SBBoxViewData.dart';
 class SBBoxView extends StatelessWidget {
   final SBBoxViewData _viewData;
   final bool _selected;
-  final GestureTapCallback onTap;
+  final GestureTapCallback _onSelect;
 
   get id => _viewData.id;
 
-  SBBoxView(this._viewData, this._selected, {this.onTap});
+  SBBoxView(this._viewData, this._selected, this._onSelect);
 
   @override
   Widget build(BuildContext context) {
     return Card(
       elevation: _selected ? 10 : Theme.of(context).cardTheme.elevation,
       child: InkWell(
-        onTap: this.onTap,
+        onTap: this._onSelect,
         child: Column(children: [
           Padding(
             padding: const EdgeInsets.all(8),
