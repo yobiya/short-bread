@@ -2,10 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shortbread/common/utility/Delegate.dart';
 import 'package:shortbread/model/box/SBBoxModel.dart';
-import 'package:shortbread/view-data/box/SBBoxViewData.dart';
+import 'package:shortbread/data/box/SBBoxData.dart';
 import 'package:shortbread/view/box/SBBoxEditDialogView.dart';
 import 'package:shortbread/view/box/SBBoxListView.dart';
-import 'package:shortbread/view/box/SBBoxView.dart';
 
 class SBBoxControllerDeleagets {
   final Delegate<int> onChangedBoxId;
@@ -35,7 +34,7 @@ class SBBoxController extends State<SBBoxControllerView> {
   @override
   Widget build(BuildContext context) {
     return SBBoxListView(
-      widget._boxModel.getViewData(),
+      widget._boxModel.getDataCollection(),
       _selectedId,
       _selectBox,
       _showEditDialog,
@@ -54,7 +53,7 @@ class SBBoxController extends State<SBBoxControllerView> {
     showDialog(
         context: context,
         builder: (context) {
-          var viewData = widget._boxModel.getViewData().singleWhere((data) => data.id == id);
+          var viewData = widget._boxModel.getDataCollection().singleWhere((data) => data.id == id);
           return SBBoxEditDialogView(
             viewData,
             _closeDialog,
@@ -67,9 +66,9 @@ class SBBoxController extends State<SBBoxControllerView> {
     Navigator.of(context).pop(context);
   }
 
-  void _closeDialogAndSave(SBBoxViewData viewData) {
+  void _closeDialogAndSave(SBBoxData data) {
     setState(() {
-      widget._boxModel.setViewData(viewData);
+      widget._boxModel.setData(data);
     });
 
     _closeDialog();

@@ -1,15 +1,15 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shortbread/view-data/box/SBBoxViewData.dart';
+import 'package:shortbread/data/box/SBBoxData.dart';
 
 class SBBoxView extends StatelessWidget {
-  final SBBoxViewData _viewData;
+  final SBBoxData _data;
   final bool _selected;
   final GestureTapCallback _onSelect;
   final VoidCallback _onTapEditButton;
 
   SBBoxView(
-    this._viewData,
+    this._data,
     this._selected,
     this._onSelect,
     this._onTapEditButton,
@@ -32,7 +32,7 @@ class SBBoxView extends StatelessWidget {
                     child: Align(
                       alignment: Alignment.topLeft,
                       child: Text(
-                        _viewData.title,
+                        _data.title,
                         style: Theme.of(context).textTheme.subtitle1,
                       ),
                     ),
@@ -54,7 +54,7 @@ class SBBoxView extends StatelessWidget {
             child: Align(
               alignment: Alignment.center,
               child: Text(
-                _viewData.description,
+                _data.description,
                 style: Theme.of(context).textTheme.bodyText1,
               ),
             ),

@@ -1,13 +1,13 @@
 import 'dart:convert';
 
-class SBBoxViewData {
+class SBBoxData {
   int id;
   String title;
   String description;
 
-  SBBoxViewData(this.id, this.title, this.description);
+  SBBoxData(this.id, this.title, this.description);
 
-  SBBoxViewData.json(String json) {
+  SBBoxData.json(String json) {
     var data = jsonDecode(json);
     id = data['id'];
     title = data['title'];

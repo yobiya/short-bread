@@ -1,17 +1,17 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shortbread/view-data/box/SBBoxViewData.dart';
+import 'package:shortbread/data/box/SBBoxData.dart';
 
 class SBBoxEditDialogView extends StatelessWidget {
-  final SBBoxViewData _viewData;
+  final SBBoxData _data;
   final void Function() _onCancel;
-  final void Function(SBBoxViewData) _onDecide;
+  final void Function(SBBoxData) _onDecide;
 
-  SBBoxEditDialogView(this._viewData, this._onCancel, this._onDecide);
+  SBBoxEditDialogView(this._data, this._onCancel, this._onDecide);
 
   @override
   Widget build(BuildContext context) {
-    var edittingViewData = SBBoxViewData(_viewData.id, _viewData.title, _viewData.description);
+    var edittingViewData = SBBoxData(_data.id, _data.title, _data.description);
 
     return AlertDialog(
       title: Text('Edit box'),
@@ -26,7 +26,7 @@ class SBBoxEditDialogView extends StatelessWidget {
                 labelText: 'Title',
               ),
               minLines: 1,
-              controller: TextEditingController(text: _viewData.title),
+              controller: TextEditingController(text: _data.title),
               onChanged: (text) => edittingViewData.title = text,
             ),
             Container(height: 20),
@@ -36,7 +36,7 @@ class SBBoxEditDialogView extends StatelessWidget {
                   border: OutlineInputBorder(),
                   labelText: 'Description',
                 ),
-                controller: TextEditingController(text: _viewData.description),
+                controller: TextEditingController(text: _data.description),
                 keyboardType: TextInputType.multiline,
                 maxLines: 12,
                 onChanged: (text) => edittingViewData.description = text,

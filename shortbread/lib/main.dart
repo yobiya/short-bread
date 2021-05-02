@@ -42,8 +42,8 @@ class _MainPageController extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    var boxViewData = _boxModel.getViewData();
-    int startSelectedBoxId = boxViewData.isEmpty ? 0 : boxViewData.first.id;
+    var boxDataCollection = _boxModel.getDataCollection();
+    int startSelectedBoxId = boxDataCollection.isEmpty ? 0 : boxDataCollection.first.id;
 
     var onChangedBoxId = Delegate<int>();
 

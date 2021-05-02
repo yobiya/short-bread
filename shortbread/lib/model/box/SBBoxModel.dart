@@ -1,21 +1,21 @@
 import 'package:shortbread/model/FileModel.dart';
-import 'package:shortbread/view-data/box/SBBoxViewData.dart';
+import 'package:shortbread/data/box/SBBoxData.dart';
 
 class SBBoxModel {
   FileModel _fileModel;
-  List<SBBoxViewData> _viewData;
+  List<SBBoxData> _dataList;
 
   SBBoxModel(this._fileModel) {
-    _viewData = _fileModel.readBoxes().toList();
+    _dataList = _fileModel.readBoxes().toList();
   }
 
-  Iterable<SBBoxViewData> getViewData() => _viewData;
+  Iterable<SBBoxData> getDataCollection() => _dataList;
 
-  void setViewData(SBBoxViewData viewData) {
-    var targetViewData = _viewData.singleWhere((data) => data.id == viewData.id);
-    targetViewData.title = viewData.title;
-    targetViewData.description = viewData.description;
+  void setData(SBBoxData data) {
+    var targetData = _dataList.singleWhere((d) => d.id == data.id);
+    targetData.title = data.title;
+    targetData.description = data.description;
 
-    _fileModel.writeBox(viewData);
+    _fileModel.writeBox(data);
   }
 }

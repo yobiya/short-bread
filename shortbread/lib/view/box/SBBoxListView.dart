@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:shortbread/common/utility/CollectionUtility.dart';
-import 'package:shortbread/view-data/box/SBBoxViewData.dart';
+import 'package:shortbread/data/box/SBBoxData.dart';
 import 'SBBoxView.dart';
 
 class SBBoxListView extends StatelessWidget {
-  final Iterable<SBBoxViewData> _viewData;
+  final Iterable<SBBoxData> _dataCollection;
   final int _selectedId;
   final void Function(int) onSelectBox;
   final void Function(int) onRequestEdit;
 
   SBBoxListView(
-    this._viewData,
+    this._dataCollection,
     this._selectedId,
     this.onSelectBox,
     this.onRequestEdit,
@@ -33,7 +33,7 @@ class SBBoxListView extends StatelessWidget {
   }
 
   List<Widget> _buildContents() {
-    var boxViewCollection = _viewData.map((data) => SBBoxView(
+    var boxViewCollection = _dataCollection.map((data) => SBBoxView(
           data,
           (_selectedId == data.id),
           () => onSelectBox(data.id),
