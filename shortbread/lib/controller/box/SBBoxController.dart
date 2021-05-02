@@ -31,8 +31,34 @@ class SBBoxController {
 
   void _showEditDialog(int id) {
     this.showDialog((context) {
+      var viewData = _boxModel.getViewData();
+      var data = viewData.singleWhere((data) => data.id == id);
+
       return AlertDialog(
         title: Text('Edit box'),
+        content: Container(
+          width: 400,
+          child: Column(
+            children: [
+              TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Title',
+                ),
+                minLines: 1,
+                controller: TextEditingController(text: data.title),
+              ),
+              Container(height: 20),
+              TextField(
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Description',
+                ),
+                controller: TextEditingController(text: data.description),
+              ),
+            ],
+          ),
+        ),
       );
     });
   }
