@@ -15,9 +15,9 @@ class SBBoxControllerDeleagets {
 class SBBoxControllerView extends StatefulWidget {
   final SBBoxControllerDeleagets _deleagets;
   final SBBoxModel _boxModel;
-  final int _startSelectedId;
+  final int _selectedId;
 
-  SBBoxControllerView(this._deleagets, this._boxModel, this._startSelectedId);
+  SBBoxControllerView(this._deleagets, this._boxModel, this._selectedId);
 
   @override
   State<StatefulWidget> createState() {

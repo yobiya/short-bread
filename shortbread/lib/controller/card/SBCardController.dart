@@ -12,9 +12,15 @@ class SBCardControllerDelegates {
 class SBCardControllerView extends StatefulWidget {
   final SBCardControllerDelegates _delegates;
   final SBCardModel _cardModel;
-  final int _startSelectedBoxId;
+  final int _selectedBoxId;
+  final int _selectedCardId;
 
-  SBCardControllerView(this._delegates, this._cardModel, this._startSelectedBoxId);
+  SBCardControllerView(
+    this._delegates,
+    this._cardModel,
+    this._selectedBoxId,
+    this._selectedCardId,
+  );
 
   @override
   State<StatefulWidget> createState() {
@@ -25,17 +31,27 @@ class SBCardControllerView extends StatefulWidget {
 class _SBCardController extends State<SBCardControllerView> {
   final SBCardControllerDelegates _delegates;
   int _selectedBoxId;
+  int _selectedCardId;
 
   _SBCardController(this._delegates, this._selectedBoxId, this._selectedCardId) {
     _delegates.onChangedBoxId.addReceiver((boxId) {
       setState(() {
         _selectedBoxId = boxId;
+
+        final cardDataCollection = widget._cardModel.getDataCollection(_selectedBoxId);
+        _selectedCardId = cardDataCollection.isEmpty ? SBCardModel.invalidId : cardDataCollection.first.id;
       });
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return SBCardListView(widget._cardModel.getDataCollection(_selectedBoxId));
+    return SBCardListView(widget._cardModel.getDataCollection(_selectedBoxId), _selectedCardId, _selectedCard);
+  }
+
+  void _selectedCard(int id) {
+    setState(() {
+      _selectedCardId = id;
+    });
   }
 }

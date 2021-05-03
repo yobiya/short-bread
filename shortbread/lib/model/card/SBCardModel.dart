@@ -1,6 +1,8 @@
 import 'package:shortbread/data/card/SBCardData.dart';
 
 class SBCardModel {
+  static const int invalidId = -1;
+
   List<SBCardData> _dataList;
 
   SBCardModel() {

@@ -42,16 +42,18 @@ class _MainPageController extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    var boxDataCollection = _boxModel.getDataCollection();
-    int startSelectedBoxId = boxDataCollection.isEmpty ? 0 : boxDataCollection.first.id;
+    final boxDataCollection = _boxModel.getDataCollection();
+    final startSelectedBoxId = boxDataCollection.isEmpty ? SBBoxModel.invalidId : boxDataCollection.first.id;
+    final cardDataCollection = _cardModel.getDataCollection(startSelectedBoxId);
+    final startSelectedCardId = cardDataCollection.isEmpty ? SBCardModel.invalidId : cardDataCollection.first.id;
 
-    var onChangedBoxId = Delegate<int>();
+    final onChangedBoxId = Delegate<int>();
 
-    var boxControllerDeleagets = SBBoxControllerDeleagets(onChangedBoxId);
-    var sbBoxControllerView = SBBoxControllerView(boxControllerDeleagets, _boxModel, startSelectedBoxId);
+    final boxControllerDeleagets = SBBoxControllerDeleagets(onChangedBoxId);
+    final sbBoxControllerView = SBBoxControllerView(boxControllerDeleagets, _boxModel, startSelectedBoxId);
 
-    var cardControllerDelegates = SBCardControllerDelegates(onChangedBoxId);
-    var sbCardControllerView = SBCardControllerView(cardControllerDelegates, _cardModel, startSelectedBoxId);
+    final cardControllerDelegates = SBCardControllerDelegates(onChangedBoxId);
+    final sbCardControllerView = SBCardControllerView(cardControllerDelegates, _cardModel, startSelectedBoxId, startSelectedCardId);
 
     return Container(
       decoration: BoxDecoration(color: Theme.of(context).backgroundColor),

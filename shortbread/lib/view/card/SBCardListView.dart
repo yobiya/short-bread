@@ -4,24 +4,12 @@ import 'package:shortbread/common/utility/CollectionUtility.dart';
 import 'package:shortbread/data/card/SBCardData.dart';
 import 'package:shortbread/view/card/SBCardView.dart';
 
-class SBCardListView extends StatefulWidget {
+class SBCardListView extends StatelessWidget {
   final Iterable<SBCardData> _dataCollection;
+  final int _selectedId;
+  final void Function(int) _onSelectCard;
 
-  SBCardListView(this._dataCollection);
-
-  @override
-  State<StatefulWidget> createState() {
-    return SBCardListViewState(this._dataCollection);
-  }
-}
-
-class SBCardListViewState extends State<SBCardListView> {
-  Iterable<SBCardData> _data;
-  int _selectedId;
-
-  SBCardListViewState(this._data) {
-    _selectedId = _data.isNotEmpty ? _data.first.id : 0;
-  }
+  SBCardListView(this._dataCollection, this._selectedId, this._onSelectCard);
 
   @override
   Widget build(BuildContext context) {
@@ -40,21 +28,15 @@ class SBCardListViewState extends State<SBCardListView> {
   }
 
   List<Widget> _buildContents() {
-    var boxViewCollection = widget._dataCollection.map((data) => SBCardView(
+    var boxViewCollection = _dataCollection.map((data) => SBCardView(
           data,
           (_selectedId == data.id),
-          () => _selectCard(data.id),
+          () => _onSelectCard(data.id),
         ));
 
     return CollectionUtility.insertBetweenAll(
       boxViewCollection,
       Container(height: 8),
     ).toList();
-  }
-
-  void _selectCard(int id) {
-    setState(() {
-      _selectedId = id;
-    });
   }
 }

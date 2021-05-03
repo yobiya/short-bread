@@ -2,7 +2,9 @@ import 'package:shortbread/model/FileModel.dart';
 import 'package:shortbread/data/box/SBBoxData.dart';
 
 class SBBoxModel {
-  FileModel _fileModel;
+  static const int invalidId = -1;
+
+  final FileModel _fileModel;
   List<SBBoxData> _dataList;
 
   SBBoxModel(this._fileModel) {
