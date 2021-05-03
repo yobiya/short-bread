@@ -7,6 +7,11 @@ class SBBoxData {
 
   SBBoxData(this.id, this.title, this.description);
 
+  SBBoxData.copy(SBBoxData source)
+      : id = source.id,
+        title = source.title,
+        description = source.description;
+
   SBBoxData.json(String json) {
     var data = jsonDecode(json);
     id = data['id'];

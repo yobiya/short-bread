@@ -4,6 +4,11 @@ class SBCardBaseData {
   String title;
 
   SBCardBaseData(this.id, this.boxId, this.title);
+
+  SBCardBaseData.copy(SBCardBaseData source)
+      : id = source.id,
+        boxId = source.boxId,
+        title = source.title;
 }
 
 class SBNoteCardData extends SBCardBaseData {

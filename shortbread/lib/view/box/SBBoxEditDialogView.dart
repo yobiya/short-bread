@@ -11,7 +11,7 @@ class SBBoxEditDialogView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    var edittingViewData = SBBoxData(_data.id, _data.title, _data.description);
+    var edittingData = SBBoxData.copy(_data);
 
     return AlertDialog(
       title: Text('Edit box'),
@@ -27,7 +27,7 @@ class SBBoxEditDialogView extends StatelessWidget {
               ),
               minLines: 1,
               controller: TextEditingController(text: _data.title),
-              onChanged: (text) => edittingViewData.title = text,
+              onChanged: (text) => edittingData.title = text,
             ),
             Container(height: 20),
             Scrollbar(
@@ -39,7 +39,7 @@ class SBBoxEditDialogView extends StatelessWidget {
                 controller: TextEditingController(text: _data.description),
                 keyboardType: TextInputType.multiline,
                 maxLines: 12,
-                onChanged: (text) => edittingViewData.description = text,
+                onChanged: (text) => edittingData.description = text,
               ),
             ),
           ],
@@ -51,7 +51,7 @@ class SBBoxEditDialogView extends StatelessWidget {
           child: Text('Cancel'),
         ),
         TextButton(
-          onPressed: () => _onDecide(edittingViewData),
+          onPressed: () => _onDecide(edittingData),
           child: Text('OK'),
         ),
       ],

@@ -53,9 +53,9 @@ class _SBBoxController extends State<SBBoxControllerView> {
     showDialog(
         context: context,
         builder: (context) {
-          var viewData = widget._boxModel.getDataCollection().singleWhere((data) => data.id == id);
+          var boxData = widget._boxModel.getDataCollection().singleWhere((data) => data.id == id);
           return SBBoxEditDialogView(
-            viewData,
+            boxData,
             _closeDialog,
             _closeDialogAndSave,
           );
