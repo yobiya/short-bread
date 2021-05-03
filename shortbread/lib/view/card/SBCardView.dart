@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:shortbread/data/card/SBCardData.dart';
 
 class SBCardView extends StatelessWidget {
-  final SBCardData _data;
+  final SBCardBaseData _data;
   final bool _selected;
   final void Function() _onSelect;
 
@@ -31,7 +31,7 @@ class SBCardView extends StatelessWidget {
             child: Align(
               alignment: Alignment.center,
               child: Text(
-                _data.path,
+                (_data as SBNoteCardData).text,
                 style: Theme.of(context).textTheme.bodyText1,
               ),
             ),

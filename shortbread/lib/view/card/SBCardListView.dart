@@ -5,7 +5,7 @@ import 'package:shortbread/data/card/SBCardData.dart';
 import 'package:shortbread/view/card/SBCardView.dart';
 
 class SBCardListView extends StatelessWidget {
-  final Iterable<SBCardData> _dataCollection;
+  final Iterable<SBCardBaseData> _dataCollection;
   final int _selectedId;
   final void Function(int) _onSelectCard;
 
