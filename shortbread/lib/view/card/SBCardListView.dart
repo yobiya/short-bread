@@ -9,13 +9,15 @@ class SBCardListView extends StatelessWidget {
   final Iterable<SBCardBaseData> _dataCollection;
   final int _selectedId;
   final void Function(int) _onSelectCard;
-  final void Function(SBNoteCardData) _onRequestNoteCardEdit;
+  final void Function() _onCreateNoteCard;
+  final void Function(SBNoteCardData) _onEditNoteCard;
 
   SBCardListView(
     this._dataCollection,
     this._selectedId,
     this._onSelectCard,
-    this._onRequestNoteCardEdit,
+    this._onCreateNoteCard,
+    this._onEditNoteCard,
   );
 
   @override
@@ -39,8 +41,8 @@ class SBCardListView extends StatelessWidget {
           onPressed: null,
         ),
         padding: EdgeInsets.zero,
-        onSelected: (value) {},
-        itemBuilder: buildAddMenuItem,
+        onSelected: _onSelectedCreateCardMenuItem,
+        itemBuilder: buildCreateCardMenuItem,
       ),
     );
   }
@@ -62,18 +64,26 @@ class SBCardListView extends StatelessWidget {
 
   Widget buildCardView(SBCardBaseData data, bool selected, void Function() onSelect) {
     if (data is SBNoteCardData) {
-      return SBNoteCardView(data, selected, onSelect, () => _onRequestNoteCardEdit(data));
+      return SBNoteCardView(data, selected, onSelect, () => _onEditNoteCard(data));
     }
 
     return Container();
   }
 
-  List<PopupMenuItem<String>> buildAddMenuItem(BuildContext context) {
+  List<PopupMenuItem<String>> buildCreateCardMenuItem(BuildContext context) {
     return <PopupMenuItem<String>>[
       PopupMenuItem<String>(
         value: SBCardTypes.note,
         child: Text('Note card'),
       ),
     ];
+  }
+
+  void _onSelectedCreateCardMenuItem(String cardType) {
+    switch (cardType) {
+      case SBCardTypes.note:
+        _onCreateNoteCard();
+        break;
+    }
   }
 }

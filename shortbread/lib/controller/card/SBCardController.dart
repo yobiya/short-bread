@@ -53,6 +53,7 @@ class _SBCardController extends State<SBCardControllerView> {
       widget._cardModel.getDataCollection(_selectedBoxId),
       _selectedCardId,
       _selectedCard,
+      _openNoteCardCreateDialog,
       _openNoteCardEditDialog,
     );
   }
@@ -62,6 +63,8 @@ class _SBCardController extends State<SBCardControllerView> {
       _selectedCardId = id;
     });
   }
+
+  void _openNoteCardCreateDialog() {}
 
   void _openNoteCardEditDialog(SBNoteCardData data) {
     showDialog(

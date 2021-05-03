@@ -7,13 +7,13 @@ class SBBoxListView extends StatelessWidget {
   final Iterable<SBBoxData> _dataCollection;
   final int _selectedId;
   final void Function(int) onSelectBox;
-  final void Function(int) onRequestEdit;
+  final void Function(int) onEdit;
 
   SBBoxListView(
     this._dataCollection,
     this._selectedId,
     this.onSelectBox,
-    this.onRequestEdit,
+    this.onEdit,
   );
 
   @override
@@ -37,7 +37,7 @@ class SBBoxListView extends StatelessWidget {
           data,
           (_selectedId == data.id),
           () => onSelectBox(data.id),
-          () => onRequestEdit(data.id),
+          () => onEdit(data.id),
         ));
 
     return CollectionUtility.insertBetweenAll(
