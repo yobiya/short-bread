@@ -37,7 +37,7 @@ class _MainPageController extends State<MainPage> {
 
   _MainPageController() {
     _boxModel = SBBoxModel(_fileModel);
-    _cardModel = SBCardModel();
+    _cardModel = SBCardModel(_fileModel);
   }
 
   @override

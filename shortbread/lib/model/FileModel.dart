@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:shortbread/data/box/SBBoxData.dart';
+import 'package:shortbread/data/card/SBCardData.dart';
 
 class FileModel {
   Directory _rootDirectory;
@@ -26,6 +27,13 @@ class FileModel {
 
   void writeBox(SBBoxData data) {
     var path = _boxDirectory.path + '/box-${data.id}.json';
+    var file = File(path);
+
+    file.writeAsStringSync(data.toJson());
+  }
+
+  void writeNoteCard(SBNoteCardData data) {
+    var path = _cardDirectory.path + '/card-${data.id}-note.json';
     var file = File(path);
 
     file.writeAsStringSync(data.toJson());

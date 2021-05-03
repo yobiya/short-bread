@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 class SBCardBaseData {
   int id;
   int boxId;
@@ -19,4 +21,15 @@ class SBNoteCardData extends SBCardBaseData {
   SBNoteCardData.copy(SBNoteCardData source)
       : note = source.note,
         super.copy(source);
+
+  String toJson() {
+    var source = {
+      'type': 'note',
+      'id': id,
+      'title': title,
+      'note': note,
+    };
+
+    return jsonEncode(source);
+  }
 }
