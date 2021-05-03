@@ -21,15 +21,15 @@ class SBBoxControllerView extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return SBBoxController(_deleagets, _startSelectedId);
+    return _SBBoxController(_deleagets, _selectedId);
   }
 }
 
-class SBBoxController extends State<SBBoxControllerView> {
+class _SBBoxController extends State<SBBoxControllerView> {
   final SBBoxControllerDeleagets _deleagets;
   int _selectedId;
 
-  SBBoxController(this._deleagets, this._selectedId);
+  _SBBoxController(this._deleagets, this._selectedId);
 
   @override
   Widget build(BuildContext context) {

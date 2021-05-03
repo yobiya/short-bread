@@ -18,15 +18,15 @@ class SBCardControllerView extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return SBCardController(_delegates, _startSelectedBoxId);
+    return _SBCardController(_delegates, _selectedBoxId, _selectedCardId);
   }
 }
 
-class SBCardController extends State<SBCardControllerView> {
+class _SBCardController extends State<SBCardControllerView> {
   final SBCardControllerDelegates _delegates;
   int _selectedBoxId;
 
-  SBCardController(this._delegates, this._selectedBoxId) {
+  _SBCardController(this._delegates, this._selectedBoxId, this._selectedCardId) {
     _delegates.onChangedBoxId.addReceiver((boxId) {
       setState(() {
         _selectedBoxId = boxId;
