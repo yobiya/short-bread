@@ -40,9 +40,9 @@ class SBBoxView extends StatelessWidget {
                 ),
                 Align(
                   alignment: Alignment.topRight,
-                  child: CupertinoButton(
-                    padding: EdgeInsets.all(4),
-                    child: Icon(Icons.edit),
+                  child: IconButton(
+                    icon: Icon(Icons.edit),
+                    color: Theme.of(context).buttonTheme.colorScheme.primary,
                     onPressed: _onTapEditButton,
                   ),
                 ),
