@@ -19,16 +19,22 @@ class SBCardListView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Theme.of(context).scaffoldBackgroundColor,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Scrollbar(
-        child: ListView(
-          padding: EdgeInsets.all(8),
-          children: _buildContents(),
+    return Scaffold(
+      body: Container(
+        decoration: BoxDecoration(
+          color: Theme.of(context).scaffoldBackgroundColor,
+          borderRadius: BorderRadius.circular(10),
         ),
+        child: Scrollbar(
+          child: ListView(
+            padding: EdgeInsets.all(8),
+            children: _buildContents(),
+          ),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
+        onPressed: () {},
       ),
     );
   }
