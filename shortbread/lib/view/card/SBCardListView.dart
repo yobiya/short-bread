@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:shortbread/common/utility/CollectionUtility.dart';
 import 'package:shortbread/data/card/SBCardData.dart';
 import 'package:shortbread/view/card/SBNoteCardView.dart';
+import 'package:shortbread/common/definition/CardDefinitions.dart';
 
 class SBCardListView extends StatelessWidget {
   final Iterable<SBCardBaseData> _dataCollection;
@@ -70,7 +71,7 @@ class SBCardListView extends StatelessWidget {
   List<PopupMenuItem<String>> buildAddMenuItem(BuildContext context) {
     return <PopupMenuItem<String>>[
       PopupMenuItem<String>(
-        value: 'note',
+        value: SBCardTypes.note,
         child: Text('Note card'),
       ),
     ];
