@@ -1,7 +1,10 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shortbread/common/utility/Delegate.dart';
+import 'package:shortbread/data/card/SBCardData.dart';
 import 'package:shortbread/model/card/SBCardModel.dart';
 import 'package:shortbread/view/card/SBCardListView.dart';
+import 'package:shortbread/view/card/SBNoteCardEditDialog.dart';
 
 class SBCardControllerDelegates {
   final Delegate<int> onChangedBoxId;
@@ -50,7 +53,7 @@ class _SBCardController extends State<SBCardControllerView> {
       widget._cardModel.getDataCollection(_selectedBoxId),
       _selectedCardId,
       _selectedCard,
-      _openEditDialog,
+      _openNoteCardEditDialog,
     );
   }
 
@@ -60,5 +63,28 @@ class _SBCardController extends State<SBCardControllerView> {
     });
   }
 
-  void _openEditDialog(int id) {}
+  void _openNoteCardEditDialog(SBNoteCardData data) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return SBNoteCardEditDialogView(
+          data,
+          _closeDialog,
+          _closeDialogAndSave,
+        );
+      },
+    );
+  }
+
+  void _closeDialog() {
+    Navigator.of(context).pop(context);
+  }
+
+  void _closeDialogAndSave(SBNoteCardData data) {
+    setState(() {
+      widget._cardModel.setNoteCardData(data);
+    });
+
+    _closeDialog();
+  }
 }

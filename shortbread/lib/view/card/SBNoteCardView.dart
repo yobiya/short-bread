@@ -15,7 +15,7 @@ class SBNoteCardView extends SBCardBaseView {
   @override
   Widget buildContent(BuildContext context) {
     return Text(
-      _data.text,
+      _data.note,
       style: Theme.of(context).textTheme.bodyText1,
     );
   }

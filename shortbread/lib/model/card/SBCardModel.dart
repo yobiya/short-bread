@@ -21,4 +21,6 @@ class SBCardModel {
   Iterable<SBCardBaseData> getDataCollection(int boxId) {
     return _dataList.where((data) => data.boxId == boxId);
   }
+
+  void setNoteCardData(SBNoteCardData data) {}
 }

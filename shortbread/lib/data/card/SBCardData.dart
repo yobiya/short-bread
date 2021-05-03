@@ -12,7 +12,11 @@ class SBCardBaseData {
 }
 
 class SBNoteCardData extends SBCardBaseData {
-  String text;
+  String note;
 
-  SBNoteCardData(int id, int boxId, String title, this.text) : super(id, boxId, title);
+  SBNoteCardData(int id, int boxId, String title, this.note) : super(id, boxId, title);
+
+  SBNoteCardData.copy(SBNoteCardData source)
+      : note = source.note,
+        super.copy(source);
 }
