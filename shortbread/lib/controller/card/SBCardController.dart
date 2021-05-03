@@ -55,6 +55,7 @@ class _SBCardController extends State<SBCardControllerView> {
       _selectedCard,
       _openNoteCardCreateDialog,
       _openNoteCardEditDialog,
+      _openCardDeleteDialog,
     );
   }
 
@@ -93,6 +94,8 @@ class _SBCardController extends State<SBCardControllerView> {
       },
     );
   }
+
+  void _openCardDeleteDialog(SBCardBaseData data) {}
 
   void _closeDialog() {
     Navigator.of(context).pop(context);

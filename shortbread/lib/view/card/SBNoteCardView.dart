@@ -10,7 +10,14 @@ class SBNoteCardView extends SBCardBaseView {
     bool selected,
     void Function() onSelect,
     void Function() onTapEditButton,
-  ) : super(_data, selected, onSelect, onTapEditButton);
+    void Function() onTapDeleteButton,
+  ) : super(
+          _data,
+          selected,
+          onSelect,
+          onTapEditButton,
+          onTapDeleteButton,
+        );
 
   @override
   Widget buildContent(BuildContext context) {
