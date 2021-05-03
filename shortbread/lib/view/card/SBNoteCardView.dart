@@ -5,7 +5,12 @@ import 'SBCardBaseView.dart';
 class SBNoteCardView extends SBCardBaseView {
   final SBNoteCardData _data;
 
-  SBNoteCardView(this._data, bool selected, void Function() onSelect) : super(_data, selected, onSelect);
+  SBNoteCardView(
+    this._data,
+    bool selected,
+    void Function() onSelect,
+    void Function() onTapEditButton,
+  ) : super(_data, selected, onSelect, onTapEditButton);
 
   @override
   Widget buildContent(BuildContext context) {

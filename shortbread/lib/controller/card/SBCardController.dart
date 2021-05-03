@@ -46,7 +46,12 @@ class _SBCardController extends State<SBCardControllerView> {
 
   @override
   Widget build(BuildContext context) {
-    return SBCardListView(widget._cardModel.getDataCollection(_selectedBoxId), _selectedCardId, _selectedCard);
+    return SBCardListView(
+      widget._cardModel.getDataCollection(_selectedBoxId),
+      _selectedCardId,
+      _selectedCard,
+      _openEditDialog,
+    );
   }
 
   void _selectedCard(int id) {
@@ -54,4 +59,6 @@ class _SBCardController extends State<SBCardControllerView> {
       _selectedCardId = id;
     });
   }
+
+  void _openEditDialog(int id) {}
 }

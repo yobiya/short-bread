@@ -6,8 +6,14 @@ abstract class SBCardBaseView extends StatelessWidget {
   final SBCardBaseData _data;
   final bool _selected;
   final void Function() _onSelect;
+  final void Function() _onTapEditButton;
 
-  SBCardBaseView(this._data, this._selected, this._onSelect);
+  SBCardBaseView(
+    this._data,
+    this._selected,
+    this._onSelect,
+    this._onTapEditButton,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -18,12 +24,29 @@ abstract class SBCardBaseView extends StatelessWidget {
         child: Column(children: [
           Padding(
             padding: const EdgeInsets.all(8),
-            child: Align(
-              alignment: Alignment.centerLeft,
-              child: Text(
-                _data.title,
-                style: Theme.of(context).textTheme.subtitle1,
-              ),
+            child: Row(
+              children: [
+                Expanded(
+                  child: Container(
+                    height: 42,
+                    child: Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        _data.title,
+                        style: Theme.of(context).textTheme.subtitle1,
+                      ),
+                    ),
+                  ),
+                ),
+                Align(
+                  alignment: Alignment.topRight,
+                  child: CupertinoButton(
+                    padding: EdgeInsets.all(4),
+                    child: Icon(Icons.edit),
+                    onPressed: _onTapEditButton,
+                  ),
+                ),
+              ],
             ),
           ),
           Padding(

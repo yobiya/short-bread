@@ -8,8 +8,14 @@ class SBCardListView extends StatelessWidget {
   final Iterable<SBCardBaseData> _dataCollection;
   final int _selectedId;
   final void Function(int) _onSelectCard;
+  final void Function(int) _onRequestEdit;
 
-  SBCardListView(this._dataCollection, this._selectedId, this._onSelectCard);
+  SBCardListView(
+    this._dataCollection,
+    this._selectedId,
+    this._onSelectCard,
+    this._onRequestEdit,
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -33,6 +39,7 @@ class SBCardListView extends StatelessWidget {
         data,
         (_selectedId == data.id),
         () => _onSelectCard(data.id),
+        () => _onRequestEdit(data.id),
       ),
     );
 
@@ -42,9 +49,9 @@ class SBCardListView extends StatelessWidget {
     ).toList();
   }
 
-  Widget buildCardViewDispatch(SBCardBaseData data, bool selected, void Function() onSelect) {
+  Widget buildCardViewDispatch(SBCardBaseData data, bool selected, void Function() onSelect, void Function() onRequestEdit) {
     if (data is SBNoteCardData) {
-      return SBNoteCardView(data, selected, onSelect);
+      return SBNoteCardView(data, selected, onSelect, onRequestEdit);
     }
 
     return Container();
