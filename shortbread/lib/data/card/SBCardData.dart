@@ -1,6 +1,11 @@
 import 'dart:convert';
 
 class SBCardBaseData {
+  static const String jsonKeyType = 'type';
+  static const String jsonKeyId = 'id';
+  static const String jsonKeyBoxId = 'box-id';
+  static const String jsonKeyTitle = 'title';
+
   int id;
   int boxId;
   String title;
@@ -11,9 +16,39 @@ class SBCardBaseData {
       : id = source.id,
         boxId = source.boxId,
         title = source.title;
+
+  factory SBCardBaseData.json(String json) {
+    var jsonMap = jsonDecode(json);
+    var cardType = jsonMap[jsonKeyType];
+    switch (cardType) {
+      case SBNoteCardData.typeName:
+        return SBNoteCardData.jsonMap(jsonMap);
+    }
+
+    return null;
+  }
+
+  SBCardBaseData.jsonMap(Map<String, Object> jsonMap)
+      : id = jsonMap[jsonKeyId],
+        boxId = jsonMap[jsonKeyBoxId],
+        title = jsonMap[jsonKeyTitle];
+
+  Map<String, Object> createBaseJsonMap(String typeName) {
+    var source = {
+      jsonKeyType: typeName,
+      jsonKeyId: id,
+      jsonKeyBoxId: boxId,
+      jsonKeyTitle: title,
+    };
+
+    return source;
+  }
 }
 
 class SBNoteCardData extends SBCardBaseData {
+  static const String typeName = 'note';
+  static const String jsonKeyNote = 'note';
+
   String note;
 
   SBNoteCardData(int id, int boxId, String title, this.note) : super(id, boxId, title);
@@ -22,13 +57,13 @@ class SBNoteCardData extends SBCardBaseData {
       : note = source.note,
         super.copy(source);
 
+  SBNoteCardData.jsonMap(Map<String, Object> jsonMap)
+      : note = jsonMap[jsonKeyNote],
+        super.jsonMap(jsonMap);
+
   String toJson() {
-    var source = {
-      'type': 'note',
-      'id': id,
-      'title': title,
-      'note': note,
-    };
+    var source = createBaseJsonMap(typeName);
+    source[jsonKeyNote] = note;
 
     return jsonEncode(source);
   }

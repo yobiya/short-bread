@@ -25,6 +25,14 @@ class FileModel {
     });
   }
 
+  Iterable<SBCardBaseData> readCards() {
+    return _cardDirectory.listSync().map((entity) {
+      var file = File(entity.path);
+      var json = file.readAsStringSync();
+      return SBCardBaseData.json(json);
+    });
+  }
+
   void writeBox(SBBoxData data) {
     var path = _boxDirectory.path + '/box-${data.id}.json';
     var file = File(path);
