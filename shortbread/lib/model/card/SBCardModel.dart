@@ -1,3 +1,4 @@
+import 'dart:math';
 import 'package:shortbread/data/card/SBCardData.dart';
 import 'package:shortbread/model/FileModel.dart';
 
@@ -11,18 +12,35 @@ class SBCardModel {
     _dataList = _fileModel.readCards().toList();
   }
 
+  SBNoteCardData createNoteCardData(int boxId) {
+    int maxId = 0;
+    for (var data in _dataList) {
+      maxId = max(maxId, data.id);
+    }
+
+    return SBNoteCardData(maxId + 1, boxId, '', '');
+  }
+
   Iterable<SBCardBaseData> getDataCollection(int boxId) {
     return _dataList.where((data) => data.boxId == boxId);
   }
 
   void setNoteCardData(SBNoteCardData data) {
-    var targetData = _dataList.singleWhere((d) => d.id == data.id);
+    var targetDataCollection = _dataList.where((d) => d.id == data.id);
 
-    if (targetData is SBNoteCardData) {
-      targetData.title = data.title;
-      targetData.note = data.note;
+    if (targetDataCollection.isEmpty) {
+      // 対象のデータが無かったので追加する
+      _dataList.add(data);
+    } else {
+      // 対象のデータが見つかったので更新する
+      var targetData = targetDataCollection.first;
 
-      _fileModel.writeNoteCard(data);
+      if (targetData is SBNoteCardData) {
+        targetData.title = data.title;
+        targetData.note = data.note;
+      }
     }
+
+    _fileModel.writeNoteCard(data);
   }
 }

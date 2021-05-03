@@ -64,13 +64,28 @@ class _SBCardController extends State<SBCardControllerView> {
     });
   }
 
-  void _openNoteCardCreateDialog() {}
+  void _openNoteCardCreateDialog() {
+    var data = widget._cardModel.createNoteCardData(_selectedBoxId);
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return SBNoteCardEditDialogView(
+          'New note card',
+          data,
+          _closeDialog,
+          _closeDialogAndSave,
+        );
+      },
+    );
+  }
 
   void _openNoteCardEditDialog(SBNoteCardData data) {
     showDialog(
       context: context,
       builder: (context) {
         return SBNoteCardEditDialogView(
+          'Edit note card',
           data,
           _closeDialog,
           _closeDialogAndSave,
