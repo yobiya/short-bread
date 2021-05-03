@@ -32,16 +32,21 @@ class SBCardListView extends StatelessWidget {
           ),
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        child: const Icon(Icons.add),
-        onPressed: () {},
+      floatingActionButton: PopupMenuButton<String>(
+        child: FloatingActionButton(
+          child: const Icon(Icons.add),
+          onPressed: null,
+        ),
+        padding: EdgeInsets.zero,
+        onSelected: (value) {},
+        itemBuilder: buildAddMenuItem,
       ),
     );
   }
 
   List<Widget> _buildContents() {
     var boxViewCollection = _dataCollection.map(
-      (data) => buildCardViewDispatch(
+      (data) => buildCardView(
         data,
         (_selectedId == data.id),
         () => _onSelectCard(data.id),
@@ -54,11 +59,20 @@ class SBCardListView extends StatelessWidget {
     ).toList();
   }
 
-  Widget buildCardViewDispatch(SBCardBaseData data, bool selected, void Function() onSelect) {
+  Widget buildCardView(SBCardBaseData data, bool selected, void Function() onSelect) {
     if (data is SBNoteCardData) {
       return SBNoteCardView(data, selected, onSelect, () => _onRequestNoteCardEdit(data));
     }
 
     return Container();
+  }
+
+  List<PopupMenuItem<String>> buildAddMenuItem(BuildContext context) {
+    return <PopupMenuItem<String>>[
+      PopupMenuItem<String>(
+        value: 'note',
+        child: Text('Note card'),
+      ),
+    ];
   }
 }
