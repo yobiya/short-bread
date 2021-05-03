@@ -3,6 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:shortbread/data/card/SBCardData.dart';
 
 abstract class SBCardBaseView extends StatelessWidget {
+  static const _editMenuItemName = 'edit';
+  static const _deleteMenuItemName = 'delete';
+
   final SBCardBaseData _data;
   final bool _selected;
   final void Function() _onSelect;
@@ -42,7 +45,7 @@ abstract class SBCardBaseView extends StatelessWidget {
                 ),
                 PopupMenuButton<String>(
                   padding: EdgeInsets.zero,
-                  onSelected: null,
+                  onSelected: _onTappedMenuItem,
                   itemBuilder: buildMenuItemList,
                 ),
               ],
@@ -60,25 +63,35 @@ abstract class SBCardBaseView extends StatelessWidget {
     );
   }
 
-  List<PopupMenuItem<String>> buildMenuItemList(BuildContext context) {
-    return <PopupMenuItem<String>>[
+  List<PopupMenuEntry<String>> buildMenuItemList(BuildContext context) {
+    return const <PopupMenuEntry<String>>[
       PopupMenuItem<String>(
-        value: 'edit',
-        child: TextButton.icon(
-          label: Text('Edit'),
-          icon: Icon(Icons.edit),
-          onPressed: _onTapEditButton,
+        value: _editMenuItemName,
+        child: ListTile(
+          leading: Icon(Icons.edit),
+          title: Text('Edit'),
         ),
       ),
+      PopupMenuDivider(),
       PopupMenuItem<String>(
-        value: 'delete',
-        child: TextButton.icon(
-          label: Text('Delete', style: const TextStyle(color: Colors.redAccent)),
-          icon: Icon(Icons.delete, color: Colors.redAccent),
-          onPressed: _onTapDeleteButton,
+        value: _deleteMenuItemName,
+        child: ListTile(
+          leading: Icon(Icons.delete, color: Colors.redAccent),
+          title: Text('Delete', style: const TextStyle(color: Colors.redAccent)),
         ),
       ),
     ];
+  }
+
+  void _onTappedMenuItem(String itemName) {
+    switch (itemName) {
+      case _editMenuItemName:
+        _onTapEditButton();
+        break;
+      case _deleteMenuItemName:
+        _onTapDeleteButton();
+        break;
+    }
   }
 
   Widget buildContent(BuildContext context);
