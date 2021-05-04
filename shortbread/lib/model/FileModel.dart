@@ -41,9 +41,18 @@ class FileModel {
   }
 
   void writeNoteCard(SBNoteCardData data) {
-    var path = _cardDirectory.path + '/card-${data.id}-note.json';
-    var file = File(path);
+    final file = File(_createNoteCardFilePath(data.id));
 
     file.writeAsStringSync(data.toJson());
+  }
+
+  void deleteNoteCard(int id) {
+    final file = File(_createNoteCardFilePath(id));
+
+    file.delete();
+  }
+
+  String _createNoteCardFilePath(int id) {
+    return _cardDirectory.path + '/card-$id-note.json';
   }
 }

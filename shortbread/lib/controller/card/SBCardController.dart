@@ -124,7 +124,7 @@ class _SBCardController extends State<SBCardControllerView> {
 
   void _closeDialogAndDelete(SBCardBaseData data) {
     setState(() {
-//      widget._cardModel.deleteCardData(data);
+      widget._cardModel.deleteCardData(data.id);
     });
 
     _closeDialog();

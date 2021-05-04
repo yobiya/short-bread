@@ -43,4 +43,10 @@ class SBCardModel {
 
     _fileModel.writeNoteCard(data);
   }
+
+  void deleteCardData(int id) {
+    _dataList.removeWhere((data) => data.id == id);
+
+    _fileModel.deleteNoteCard(id);
+  }
 }
