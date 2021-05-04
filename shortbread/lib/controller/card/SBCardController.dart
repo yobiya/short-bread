@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shortbread/common/utility/Delegate.dart';
+import 'package:shortbread/common/view/DeleteDialogView.dart';
 import 'package:shortbread/data/card/SBCardData.dart';
 import 'package:shortbread/model/card/SBCardModel.dart';
 import 'package:shortbread/view/card/SBCardListView.dart';
@@ -95,7 +96,19 @@ class _SBCardController extends State<SBCardControllerView> {
     );
   }
 
-  void _openCardDeleteDialog(SBCardBaseData data) {}
+  void _openCardDeleteDialog(SBCardBaseData data) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return DeleteDialogView(
+          'Do you delete this card?',
+          data.title,
+          _closeDialog,
+          () => _closeDialogAndDelete(data),
+        );
+      },
+    );
+  }
 
   void _closeDialog() {
     Navigator.of(context).pop(context);
@@ -104,6 +117,14 @@ class _SBCardController extends State<SBCardControllerView> {
   void _closeDialogAndSave(SBNoteCardData data) {
     setState(() {
       widget._cardModel.setNoteCardData(data);
+    });
+
+    _closeDialog();
+  }
+
+  void _closeDialogAndDelete(SBCardBaseData data) {
+    setState(() {
+//      widget._cardModel.deleteCardData(data);
     });
 
     _closeDialog();
