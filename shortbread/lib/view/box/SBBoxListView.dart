@@ -6,28 +6,36 @@ import 'SBBoxView.dart';
 class SBBoxListView extends StatelessWidget {
   final Iterable<SBBoxData> _dataCollection;
   final int _selectedId;
-  final void Function(int) onSelectBox;
-  final void Function(int) onEdit;
+  final void Function(int) _onSelectBox;
+  final void Function() _onPressedAddbutton;
+  final void Function(int) _onEdit;
 
   SBBoxListView(
     this._dataCollection,
     this._selectedId,
-    this.onSelectBox,
-    this.onEdit,
+    this._onSelectBox,
+    this._onPressedAddbutton,
+    this._onEdit,
   );
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      decoration: BoxDecoration(
-        color: Theme.of(context).scaffoldBackgroundColor,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Scrollbar(
-        child: ListView(
-          padding: EdgeInsets.all(8),
-          children: _buildContents(),
+    return Scaffold(
+      body: Container(
+        decoration: BoxDecoration(
+          color: Theme.of(context).scaffoldBackgroundColor,
+          borderRadius: BorderRadius.circular(10),
         ),
+        child: Scrollbar(
+          child: ListView(
+            padding: EdgeInsets.all(8),
+            children: _buildContents(),
+          ),
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: const Icon(Icons.add),
+        onPressed: _onPressedAddbutton,
       ),
     );
   }
@@ -36,8 +44,8 @@ class SBBoxListView extends StatelessWidget {
     var boxViewCollection = _dataCollection.map((data) => SBBoxView(
           data,
           (_selectedId == data.id),
-          () => onSelectBox(data.id),
-          () => onEdit(data.id),
+          () => _onSelectBox(data.id),
+          () => _onEdit(data.id),
         ));
 
     return CollectionUtility.insertBetweenAll(

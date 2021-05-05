@@ -53,20 +53,20 @@ class _SBCardController extends State<SBCardControllerView> {
     return SBCardListView(
       widget._cardModel.getDataCollection(_selectedBoxId),
       _selectedCardId,
-      _selectedCard,
-      _openNoteCardCreateDialog,
-      _openNoteCardEditDialog,
-      _openCardDeleteDialog,
+      _selectCard,
+      _showNoteCardCreateDialog,
+      _showNoteCardEditDialog,
+      _showCardDeleteDialog,
     );
   }
 
-  void _selectedCard(int id) {
+  void _selectCard(int id) {
     setState(() {
       _selectedCardId = id;
     });
   }
 
-  void _openNoteCardCreateDialog() {
+  void _showNoteCardCreateDialog() {
     var data = widget._cardModel.createNoteCardData(_selectedBoxId);
 
     showDialog(
@@ -82,7 +82,7 @@ class _SBCardController extends State<SBCardControllerView> {
     );
   }
 
-  void _openNoteCardEditDialog(SBNoteCardData data) {
+  void _showNoteCardEditDialog(SBNoteCardData data) {
     showDialog(
       context: context,
       builder: (context) {
@@ -96,7 +96,7 @@ class _SBCardController extends State<SBCardControllerView> {
     );
   }
 
-  void _openCardDeleteDialog(SBCardBaseData data) {
+  void _showCardDeleteDialog(SBCardBaseData data) {
     showDialog(
       context: context,
       builder: (context) {

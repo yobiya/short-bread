@@ -37,6 +37,7 @@ class _SBBoxController extends State<SBBoxControllerView> {
       widget._boxModel.getDataCollection(),
       _selectedId,
       _selectBox,
+      _showCreateDialog,
       _showEditDialog,
     );
   }
@@ -48,6 +49,8 @@ class _SBBoxController extends State<SBBoxControllerView> {
       _selectedId = id;
     });
   }
+
+  void _showCreateDialog() {}
 
   void _showEditDialog(int id) {
     showDialog(
