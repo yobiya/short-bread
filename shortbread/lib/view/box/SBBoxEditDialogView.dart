@@ -3,25 +3,26 @@ import 'package:flutter/material.dart';
 import 'package:shortbread/data/box/SBBoxData.dart';
 
 class SBBoxEditDialogView extends StatelessWidget {
+  final String _name;
   final SBBoxData _data;
   final void Function() _onCancel;
   final void Function(SBBoxData) _onDecide;
 
-  SBBoxEditDialogView(this._data, this._onCancel, this._onDecide);
+  SBBoxEditDialogView(this._name, this._data, this._onCancel, this._onDecide);
 
   @override
   Widget build(BuildContext context) {
     var edittingData = SBBoxData.copy(_data);
 
     return AlertDialog(
-      title: Text('Edit box'),
+      title: Text(_name),
       content: Container(
         width: 400,
         height: 420,
         child: Column(
           children: [
             TextField(
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Title',
               ),
@@ -32,7 +33,7 @@ class SBBoxEditDialogView extends StatelessWidget {
             Container(height: 20),
             Scrollbar(
               child: TextField(
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   labelText: 'Description',
                 ),
@@ -48,11 +49,11 @@ class SBBoxEditDialogView extends StatelessWidget {
       actions: [
         TextButton(
           onPressed: _onCancel,
-          child: Text('Cancel'),
+          child: const Text('Cancel'),
         ),
         TextButton(
           onPressed: () => _onDecide(edittingData),
-          child: Text('OK'),
+          child: const Text('OK'),
         ),
       ],
     );

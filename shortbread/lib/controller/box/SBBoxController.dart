@@ -50,15 +50,30 @@ class _SBBoxController extends State<SBBoxControllerView> {
     });
   }
 
-  void _showCreateDialog() {}
+  void _showCreateDialog() {
+    final data = widget._boxModel.createData();
 
-  void _showEditDialog(int id) {
     showDialog(
         context: context,
         builder: (context) {
-          var boxData = widget._boxModel.getDataCollection().singleWhere((data) => data.id == id);
           return SBBoxEditDialogView(
-            boxData,
+            'New box',
+            data,
+            _closeDialog,
+            _closeDialogAndSave,
+          );
+        });
+  }
+
+  void _showEditDialog(int id) {
+    final data = widget._boxModel.getDataCollection().singleWhere((data) => data.id == id);
+
+    showDialog(
+        context: context,
+        builder: (context) {
+          return SBBoxEditDialogView(
+            'Edit box',
+            data,
             _closeDialog,
             _closeDialogAndSave,
           );
