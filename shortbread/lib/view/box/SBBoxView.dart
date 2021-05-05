@@ -3,16 +3,21 @@ import 'package:flutter/material.dart';
 import 'package:shortbread/data/box/SBBoxData.dart';
 
 class SBBoxView extends StatelessWidget {
+  static const _editMenuItemName = 'edit';
+  static const _deleteMenuItemName = 'delete';
+
   final SBBoxData _data;
   final bool _selected;
   final GestureTapCallback _onSelect;
-  final VoidCallback _onTapEditButton;
+  final void Function() _onTapEditButton;
+  final void Function() _onTapDeleteButton;
 
   SBBoxView(
     this._data,
     this._selected,
     this._onSelect,
     this._onTapEditButton,
+    this._onTapDeleteButton,
   );
 
   @override
@@ -38,13 +43,10 @@ class SBBoxView extends StatelessWidget {
                     ),
                   ),
                 ),
-                Align(
-                  alignment: Alignment.topRight,
-                  child: IconButton(
-                    icon: Icon(Icons.edit),
-                    color: Theme.of(context).buttonTheme.colorScheme.primary,
-                    onPressed: _onTapEditButton,
-                  ),
+                PopupMenuButton<String>(
+                  padding: EdgeInsets.zero,
+                  onSelected: _onTappedMenuItem,
+                  itemBuilder: _buildMenuItemList,
                 ),
               ],
             ),
@@ -62,5 +64,36 @@ class SBBoxView extends StatelessWidget {
         ]),
       ),
     );
+  }
+
+  List<PopupMenuEntry<String>> _buildMenuItemList(BuildContext context) {
+    return const <PopupMenuEntry<String>>[
+      PopupMenuItem<String>(
+        value: _editMenuItemName,
+        child: ListTile(
+          leading: Icon(Icons.edit),
+          title: Text('Edit'),
+        ),
+      ),
+      PopupMenuDivider(),
+      PopupMenuItem<String>(
+        value: _deleteMenuItemName,
+        child: ListTile(
+          leading: Icon(Icons.delete, color: Colors.redAccent),
+          title: Text('Delete', style: TextStyle(color: Colors.redAccent)),
+        ),
+      ),
+    ];
+  }
+
+  void _onTappedMenuItem(String itemName) {
+    switch (itemName) {
+      case _editMenuItemName:
+        _onTapEditButton();
+        break;
+      case _deleteMenuItemName:
+        _onTapDeleteButton();
+        break;
+    }
   }
 }

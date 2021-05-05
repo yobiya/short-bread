@@ -9,6 +9,7 @@ class SBBoxListView extends StatelessWidget {
   final void Function(int) _onSelectBox;
   final void Function() _onPressedAddbutton;
   final void Function(int) _onEdit;
+  final void Function(int) _onDelete;
 
   SBBoxListView(
     this._dataCollection,
@@ -16,6 +17,7 @@ class SBBoxListView extends StatelessWidget {
     this._onSelectBox,
     this._onPressedAddbutton,
     this._onEdit,
+    this._onDelete,
   );
 
   @override
@@ -46,6 +48,7 @@ class SBBoxListView extends StatelessWidget {
           (_selectedId == data.id),
           () => _onSelectBox(data.id),
           () => _onEdit(data.id),
+          () => _onDelete(data.id),
         ));
 
     return CollectionUtility.insertBetweenAll(

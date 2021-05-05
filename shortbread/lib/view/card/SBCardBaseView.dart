@@ -46,7 +46,7 @@ abstract class SBCardBaseView extends StatelessWidget {
                 PopupMenuButton<String>(
                   padding: EdgeInsets.zero,
                   onSelected: _onTappedMenuItem,
-                  itemBuilder: buildMenuItemList,
+                  itemBuilder: _buildMenuItemList,
                 ),
               ],
             ),
@@ -63,7 +63,7 @@ abstract class SBCardBaseView extends StatelessWidget {
     );
   }
 
-  List<PopupMenuEntry<String>> buildMenuItemList(BuildContext context) {
+  List<PopupMenuEntry<String>> _buildMenuItemList(BuildContext context) {
     return const <PopupMenuEntry<String>>[
       PopupMenuItem<String>(
         value: _editMenuItemName,
@@ -77,7 +77,7 @@ abstract class SBCardBaseView extends StatelessWidget {
         value: _deleteMenuItemName,
         child: ListTile(
           leading: Icon(Icons.delete, color: Colors.redAccent),
-          title: Text('Delete', style: const TextStyle(color: Colors.redAccent)),
+          title: Text('Delete', style: TextStyle(color: Colors.redAccent)),
         ),
       ),
     ];

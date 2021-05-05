@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shortbread/common/utility/Delegate.dart';
+import 'package:shortbread/common/view/DeleteDialogView.dart';
 import 'package:shortbread/model/box/SBBoxModel.dart';
 import 'package:shortbread/data/box/SBBoxData.dart';
 import 'package:shortbread/view/box/SBBoxEditDialogView.dart';
@@ -39,6 +40,7 @@ class _SBBoxController extends State<SBBoxControllerView> {
       _selectBox,
       _showCreateDialog,
       _showEditDialog,
+      _showDeleteDialog,
     );
   }
 
@@ -80,6 +82,22 @@ class _SBBoxController extends State<SBBoxControllerView> {
         });
   }
 
+  void _showDeleteDialog(int id) {
+    final data = widget._boxModel.getDataCollection().singleWhere((data) => data.id == id);
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return DeleteDialogView(
+          'Do you delete this box?',
+          data.title,
+          _closeDialog,
+          () => _closeDialogAndDelete(id),
+        );
+      },
+    );
+  }
+
   void _closeDialog() {
     Navigator.of(context).pop(context);
   }
@@ -87,6 +105,14 @@ class _SBBoxController extends State<SBBoxControllerView> {
   void _closeDialogAndSave(SBBoxData data) {
     setState(() {
       widget._boxModel.setData(data);
+    });
+
+    _closeDialog();
+  }
+
+  void _closeDialogAndDelete(int id) {
+    setState(() {
+      widget._boxModel.deleteData(id);
     });
 
     _closeDialog();

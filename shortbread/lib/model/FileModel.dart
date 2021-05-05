@@ -40,6 +40,12 @@ class FileModel {
     file.writeAsStringSync(data.toJson());
   }
 
+  void deleteBox(int id) {
+    final file = File(_createBoxFilePath(id));
+
+    file.delete();
+  }
+
   void writeNoteCard(SBNoteCardData data) {
     final file = File(_createNoteCardFilePath(data.id));
 
@@ -52,7 +58,7 @@ class FileModel {
     file.delete();
   }
 
-  String _createNoteCardFilePath(int id) {
-    return _cardDirectory.path + '/card-$id-note.json';
-  }
+  String _createBoxFilePath(int id) => _boxDirectory.path + '/box-$id.json';
+
+  String _createNoteCardFilePath(int id) => _cardDirectory.path + '/card-$id-note.json';
 }

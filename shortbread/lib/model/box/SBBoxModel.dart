@@ -39,4 +39,10 @@ class SBBoxModel {
 
     _fileModel.writeBox(data);
   }
+
+  void deleteData(int id) {
+    _dataList.removeWhere((data) => data.id == id);
+
+    _fileModel.deleteBox(id);
+  }
 }
