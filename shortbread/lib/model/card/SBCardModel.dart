@@ -47,21 +47,19 @@ class SBCardModel {
       if (targetData is SBNoteCardData && data is SBNoteCardData) {
         targetData.title = data.title;
         targetData.note = data.note;
-
-        _fileModel.writeNoteCard(data);
       } else if (targetData is SBUrlCardData && data is SBUrlCardData) {
         targetData.title = data.title;
         targetData.url = data.url;
         targetData.description = data.description;
-
-        _fileModel.writeUrlCard(data);
       }
     }
+
+    _fileModel.writeCard(data);
   }
 
   void deleteCardData(int id) {
     _dataList.removeWhere((data) => data.id == id);
 
-    _fileModel.deleteNoteCard(id);
+    _fileModel.deleteCard(id);
   }
 }

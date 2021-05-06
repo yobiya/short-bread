@@ -46,27 +46,19 @@ class FileModel {
     file.delete();
   }
 
-  void writeNoteCard(SBNoteCardData data) {
-    final file = File(_createNoteCardFilePath(data.id));
+  void writeCard(SBCardBaseData data) {
+    final file = File(_createCardFilePath(data.id));
 
     file.writeAsStringSync(data.toJson());
   }
 
-  void writeUrlCard(SBUrlCardData data) {
-    final file = File(_createUrlCardFilePath(data.id));
-
-    file.writeAsStringSync(data.toJson());
-  }
-
-  void deleteNoteCard(int id) {
-    final file = File(_createNoteCardFilePath(id));
+  void deleteCard(int id) {
+    final file = File(_createCardFilePath(id));
 
     file.delete();
   }
 
   String _createBoxFilePath(int id) => _boxDirectory.path + '/box-$id.json';
 
-  String _createNoteCardFilePath(int id) => _cardDirectory.path + '/card-$id-note.json';
-
-  String _createUrlCardFilePath(int id) => _cardDirectory.path + '/card-$id-url.json';
+  String _createCardFilePath(int id) => _cardDirectory.path + '/card-$id.json';
 }

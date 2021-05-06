@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:shortbread/common/definition/CardDefinitions.dart';
 
-class SBCardBaseData {
+abstract class SBCardBaseData {
   static const jsonKeyType = 'type';
   static const jsonKeyId = 'id';
   static const jsonKeyBoxId = 'box-id';
@@ -25,6 +25,8 @@ class SBCardBaseData {
     switch (cardType) {
       case SBCardTypes.note:
         return SBNoteCardData.jsonMap(jsonMap);
+      case SBCardTypes.url:
+        return SBUrlCardData.jsonMap(jsonMap);
     }
 
     return null;
@@ -35,9 +37,11 @@ class SBCardBaseData {
         boxId = jsonMap[jsonKeyBoxId],
         title = jsonMap[jsonKeyTitle];
 
+  String toJson();
+
   Map<String, Object> createBaseJsonMap(String typeName) {
     var jsonMap = {
-      jsonKeyType: SBCardTypes.note,
+      jsonKeyType: typeName,
       jsonKeyId: id,
       jsonKeyBoxId: boxId,
       jsonKeyTitle: title,
@@ -62,6 +66,7 @@ class SBNoteCardData extends SBCardBaseData {
       : note = jsonMap[jsonKeyNote],
         super.jsonMap(jsonMap);
 
+  @override
   String toJson() {
     var jsonMap = createBaseJsonMap(SBCardTypes.note);
     jsonMap[jsonKeyNote] = note;
@@ -95,6 +100,7 @@ class SBUrlCardData extends SBCardBaseData {
         description = jsonMap[jsonKeyDescription],
         super.jsonMap(jsonMap);
 
+  @override
   String toJson() {
     var jsonMap = createBaseJsonMap(SBCardTypes.url);
     jsonMap[jsonKeyUrl] = url;
