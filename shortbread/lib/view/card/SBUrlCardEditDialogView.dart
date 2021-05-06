@@ -2,17 +2,17 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shortbread/data/card/SBCardData.dart';
 
-class SBNoteCardEditDialogView extends StatelessWidget {
+class SBUrlCardEditDialogView extends StatelessWidget {
   final String _name;
-  final SBNoteCardData _data;
+  final SBUrlCardData _data;
   final void Function() _onCancel;
   final void Function(SBCardBaseData) _onDecide;
 
-  SBNoteCardEditDialogView(this._name, this._data, this._onCancel, this._onDecide);
+  SBUrlCardEditDialogView(this._name, this._data, this._onCancel, this._onDecide);
 
   @override
   Widget build(BuildContext context) {
-    var edittingData = SBNoteCardData.copy(_data);
+    var edittingData = SBUrlCardData.copy(_data);
 
     return AlertDialog(
       title: Text(_name),
@@ -31,16 +31,26 @@ class SBNoteCardEditDialogView extends StatelessWidget {
               onChanged: (text) => edittingData.title = text,
             ),
             Container(height: 20),
+            TextField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                labelText: 'URL',
+              ),
+              minLines: 1,
+              controller: TextEditingController(text: _data.url),
+              onChanged: (text) => edittingData.url = text,
+            ),
+            Container(height: 20),
             Scrollbar(
               child: TextField(
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText: 'Note',
+                  labelText: 'Description',
                 ),
-                controller: TextEditingController(text: _data.note),
+                controller: TextEditingController(text: _data.description),
                 keyboardType: TextInputType.multiline,
-                maxLines: 12,
-                onChanged: (text) => edittingData.note = text,
+                maxLines: 8,
+                onChanged: (text) => edittingData.description = text,
               ),
             ),
           ],

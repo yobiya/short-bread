@@ -21,11 +21,20 @@ class SBCardModel {
     return SBNoteCardData(maxId + 1, boxId, '', '');
   }
 
+  SBUrlCardData createUrlCardData(int boxId) {
+    int maxId = 0;
+    for (var data in _dataList) {
+      maxId = max(maxId, data.id);
+    }
+
+    return SBUrlCardData(maxId + 1, boxId, '', '', '');
+  }
+
   Iterable<SBCardBaseData> getDataCollection(int boxId) {
     return _dataList.where((data) => data.boxId == boxId);
   }
 
-  void setNoteCardData(SBNoteCardData data) {
+  void setCardData(SBCardBaseData data) {
     var targetDataCollection = _dataList.where((d) => d.id == data.id);
 
     if (targetDataCollection.isEmpty) {
@@ -35,13 +44,19 @@ class SBCardModel {
       // 対象のデータが見つかったので更新する
       var targetData = targetDataCollection.first;
 
-      if (targetData is SBNoteCardData) {
+      if (targetData is SBNoteCardData && data is SBNoteCardData) {
         targetData.title = data.title;
         targetData.note = data.note;
+
+        _fileModel.writeNoteCard(data);
+      } else if (targetData is SBUrlCardData && data is SBUrlCardData) {
+        targetData.title = data.title;
+        targetData.url = data.url;
+        targetData.description = data.description;
+
+        _fileModel.writeUrlCard(data);
       }
     }
-
-    _fileModel.writeNoteCard(data);
   }
 
   void deleteCardData(int id) {

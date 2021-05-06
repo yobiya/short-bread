@@ -6,6 +6,7 @@ import 'package:shortbread/data/card/SBCardData.dart';
 import 'package:shortbread/model/card/SBCardModel.dart';
 import 'package:shortbread/view/card/SBCardListView.dart';
 import 'package:shortbread/view/card/SBNoteCardEditDialog.dart';
+import 'package:shortbread/view/card/SBUrlCardEditDialogView.dart';
 
 class SBCardControllerDelegates {
   final Delegate<int> onChangedBoxId;
@@ -56,6 +57,8 @@ class _SBCardController extends State<SBCardControllerView> {
       _selectCard,
       _showNoteCardCreateDialog,
       _showNoteCardEditDialog,
+      _showUrlCardCreateDialog,
+      _showUrlCardEditDialog,
       _showCardDeleteDialog,
     );
   }
@@ -96,6 +99,36 @@ class _SBCardController extends State<SBCardControllerView> {
     );
   }
 
+  void _showUrlCardCreateDialog() {
+    var data = widget._cardModel.createUrlCardData(_selectedBoxId);
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return SBUrlCardEditDialogView(
+          'New URL card',
+          data,
+          _closeDialog,
+          _closeDialogAndSave,
+        );
+      },
+    );
+  }
+
+  void _showUrlCardEditDialog(SBUrlCardData data) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return SBUrlCardEditDialogView(
+          'Edit URL card',
+          data,
+          _closeDialog,
+          _closeDialogAndSave,
+        );
+      },
+    );
+  }
+
   void _showCardDeleteDialog(SBCardBaseData data) {
     showDialog(
       context: context,
@@ -114,9 +147,9 @@ class _SBCardController extends State<SBCardControllerView> {
     Navigator.of(context).pop(context);
   }
 
-  void _closeDialogAndSave(SBNoteCardData data) {
+  void _closeDialogAndSave(SBCardBaseData data) {
     setState(() {
-      widget._cardModel.setNoteCardData(data);
+      widget._cardModel.setCardData(data);
     });
 
     _closeDialog();

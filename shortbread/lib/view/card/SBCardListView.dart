@@ -4,6 +4,7 @@ import 'package:shortbread/common/utility/CollectionUtility.dart';
 import 'package:shortbread/data/card/SBCardData.dart';
 import 'package:shortbread/view/card/SBNoteCardView.dart';
 import 'package:shortbread/common/definition/CardDefinitions.dart';
+import 'package:shortbread/view/card/SBUrlCardView.dart';
 
 class SBCardListView extends StatelessWidget {
   final Iterable<SBCardBaseData> _dataCollection;
@@ -11,7 +12,9 @@ class SBCardListView extends StatelessWidget {
   final void Function(int) _onSelectCard;
   final void Function() _onCreateNoteCard;
   final void Function(SBNoteCardData) _onEditNoteCard;
-  final void Function(SBNoteCardData) _onDeleteNoteCard;
+  final void Function() _onCreateUrlCard;
+  final void Function(SBUrlCardData) _onEditUrlCard;
+  final void Function(SBCardBaseData) _onDeleteCard;
 
   SBCardListView(
     this._dataCollection,
@@ -19,7 +22,9 @@ class SBCardListView extends StatelessWidget {
     this._onSelectCard,
     this._onCreateNoteCard,
     this._onEditNoteCard,
-    this._onDeleteNoteCard,
+    this._onCreateUrlCard,
+    this._onEditUrlCard,
+    this._onDeleteCard,
   );
 
   @override
@@ -71,7 +76,17 @@ class SBCardListView extends StatelessWidget {
         selected,
         onSelect,
         () => _onEditNoteCard(data),
-        () => _onDeleteNoteCard(data),
+        () => _onDeleteCard(data),
+      );
+    }
+
+    if (data is SBUrlCardData) {
+      return SBUrlCardView(
+        data,
+        selected,
+        onSelect,
+        () => _onEditUrlCard(data),
+        () => _onDeleteCard(data),
       );
     }
 
@@ -84,6 +99,10 @@ class SBCardListView extends StatelessWidget {
         value: SBCardTypes.note,
         child: Text('Note card'),
       ),
+      PopupMenuItem<String>(
+        value: SBCardTypes.url,
+        child: Text('URL card'),
+      ),
     ];
   }
 
@@ -91,6 +110,9 @@ class SBCardListView extends StatelessWidget {
     switch (cardType) {
       case SBCardTypes.note:
         _onCreateNoteCard();
+        break;
+      case SBCardTypes.url:
+        _onCreateUrlCard();
         break;
     }
   }

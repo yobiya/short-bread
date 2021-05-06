@@ -52,6 +52,12 @@ class FileModel {
     file.writeAsStringSync(data.toJson());
   }
 
+  void writeUrlCard(SBUrlCardData data) {
+    final file = File(_createUrlCardFilePath(data.id));
+
+    file.writeAsStringSync(data.toJson());
+  }
+
   void deleteNoteCard(int id) {
     final file = File(_createNoteCardFilePath(id));
 
@@ -61,4 +67,6 @@ class FileModel {
   String _createBoxFilePath(int id) => _boxDirectory.path + '/box-$id.json';
 
   String _createNoteCardFilePath(int id) => _cardDirectory.path + '/card-$id-note.json';
+
+  String _createUrlCardFilePath(int id) => _cardDirectory.path + '/card-$id-url.json';
 }

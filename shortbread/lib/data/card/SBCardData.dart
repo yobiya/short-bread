@@ -36,14 +36,14 @@ class SBCardBaseData {
         title = jsonMap[jsonKeyTitle];
 
   Map<String, Object> createBaseJsonMap(String typeName) {
-    var source = {
+    var jsonMap = {
       jsonKeyType: SBCardTypes.note,
       jsonKeyId: id,
       jsonKeyBoxId: boxId,
       jsonKeyTitle: title,
     };
 
-    return source;
+    return jsonMap;
   }
 }
 
@@ -63,32 +63,43 @@ class SBNoteCardData extends SBCardBaseData {
         super.jsonMap(jsonMap);
 
   String toJson() {
-    var source = createBaseJsonMap(SBCardTypes.note);
-    source[jsonKeyNote] = note;
+    var jsonMap = createBaseJsonMap(SBCardTypes.note);
+    jsonMap[jsonKeyNote] = note;
 
-    return jsonEncode(source);
+    return jsonEncode(jsonMap);
   }
 }
 
 class SBUrlCardData extends SBCardBaseData {
   static const jsonKeyUrl = 'url';
+  static const jsonKeyDescription = 'description';
 
   String url;
+  String description;
 
-  SBUrlCardData(int id, int boxId, String title, this.url) : super(id, boxId, title);
+  SBUrlCardData(
+    int id,
+    int boxId,
+    String title,
+    this.url,
+    this.description,
+  ) : super(id, boxId, title);
 
   SBUrlCardData.copy(SBUrlCardData source)
       : url = source.url,
+        description = source.description,
         super.copy(source);
 
   SBUrlCardData.jsonMap(Map<String, Object> jsonMap)
       : url = jsonMap[jsonKeyUrl],
+        description = jsonMap[jsonKeyDescription],
         super.jsonMap(jsonMap);
 
   String toJson() {
-    var source = createBaseJsonMap(SBCardTypes.url);
-    source[jsonKeyUrl] = url;
+    var jsonMap = createBaseJsonMap(SBCardTypes.url);
+    jsonMap[jsonKeyUrl] = url;
+    jsonMap[jsonKeyDescription] = description;
 
-    return jsonEncode(source);
+    return jsonEncode(jsonMap);
   }
 }
