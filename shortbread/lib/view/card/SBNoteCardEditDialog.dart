@@ -1,61 +1,36 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shortbread/data/card/SBCardData.dart';
+import 'SBCardEditDialogBaseView.dart';
 
-class SBNoteCardEditDialogView extends StatelessWidget {
-  final String _name;
-  final SBNoteCardData _data;
-  final void Function() _onCancel;
-  final void Function(SBCardBaseData) _onDecide;
+class SBNoteCardEditDialogView extends SBCardEditDialogBaseView {
+  final SBNoteCardData _edittingData;
 
-  SBNoteCardEditDialogView(this._name, this._data, this._onCancel, this._onDecide);
+  SBNoteCardEditDialogView(
+    String name,
+    SBNoteCardData data,
+    void Function() onCancel,
+    void Function(SBCardBaseData) onDecide,
+  )   : _edittingData = SBNoteCardData.copy(data),
+        super(name, onCancel, onDecide);
 
   @override
-  Widget build(BuildContext context) {
-    var edittingData = SBNoteCardData.copy(_data);
+  SBCardBaseData getEdittingData() => _edittingData;
 
-    return AlertDialog(
-      title: Text(_name),
-      content: Container(
-        width: 400,
-        height: 420,
-        child: Column(
-          children: [
-            TextField(
-              decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                labelText: 'Title',
-              ),
-              minLines: 1,
-              controller: TextEditingController(text: _data.title),
-              onChanged: (text) => edittingData.title = text,
-            ),
-            Container(height: 20),
-            Scrollbar(
-              child: TextField(
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: 'Note',
-                ),
-                controller: TextEditingController(text: _data.note),
-                keyboardType: TextInputType.multiline,
-                maxLines: 12,
-                onChanged: (text) => edittingData.note = text,
-              ),
-            ),
-          ],
+  @override
+  Iterable<Widget> buildContexts() {
+    return [
+      Scrollbar(
+        child: TextField(
+          decoration: const InputDecoration(
+            border: OutlineInputBorder(),
+            labelText: 'Note',
+          ),
+          controller: TextEditingController(text: _edittingData.note),
+          keyboardType: TextInputType.multiline,
+          maxLines: 12,
+          onChanged: (text) => _edittingData.note = text,
         ),
       ),
-      actions: [
-        TextButton(
-          onPressed: _onCancel,
-          child: Text('Cancel'),
-        ),
-        TextButton(
-          onPressed: () => _onDecide(edittingData),
-          child: Text('OK'),
-        ),
-      ],
-    );
+    ];
   }
 }
