@@ -3,10 +3,10 @@ import 'dart:convert';
 import 'package:shortbread/common/definition/CardDefinitions.dart';
 
 class SBCardBaseData {
-  static const String jsonKeyType = 'type';
-  static const String jsonKeyId = 'id';
-  static const String jsonKeyBoxId = 'box-id';
-  static const String jsonKeyTitle = 'title';
+  static const jsonKeyType = 'type';
+  static const jsonKeyId = 'id';
+  static const jsonKeyBoxId = 'box-id';
+  static const jsonKeyTitle = 'title';
 
   int id;
   int boxId;
@@ -48,7 +48,7 @@ class SBCardBaseData {
 }
 
 class SBNoteCardData extends SBCardBaseData {
-  static const String jsonKeyNote = 'note';
+  static const jsonKeyNote = 'note';
 
   String note;
 
@@ -65,6 +65,29 @@ class SBNoteCardData extends SBCardBaseData {
   String toJson() {
     var source = createBaseJsonMap(SBCardTypes.note);
     source[jsonKeyNote] = note;
+
+    return jsonEncode(source);
+  }
+}
+
+class SBUrlCardData extends SBCardBaseData {
+  static const jsonKeyUrl = 'url';
+
+  String url;
+
+  SBUrlCardData(int id, int boxId, String title, this.url) : super(id, boxId, title);
+
+  SBUrlCardData.copy(SBUrlCardData source)
+      : url = source.url,
+        super.copy(source);
+
+  SBUrlCardData.jsonMap(Map<String, Object> jsonMap)
+      : url = jsonMap[jsonKeyUrl],
+        super.jsonMap(jsonMap);
+
+  String toJson() {
+    var source = createBaseJsonMap(SBCardTypes.url);
+    source[jsonKeyUrl] = url;
 
     return jsonEncode(source);
   }

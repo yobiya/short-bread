@@ -1,3 +1,4 @@
 class SBCardTypes {
-  static const String note = 'note';
+  static const note = 'note';
+  static const url = 'url';
 }
