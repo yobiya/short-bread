@@ -15,6 +15,7 @@ class SBCardListView extends StatelessWidget {
   final void Function() _onCreateUrlCard;
   final void Function(SBUrlCardData) _onEditUrlCard;
   final void Function(SBCardBaseData) _onDeleteCard;
+  final Future<bool> Function(String) _onOpenBrowser;
 
   SBCardListView(
     this._dataCollection,
@@ -25,6 +26,7 @@ class SBCardListView extends StatelessWidget {
     this._onCreateUrlCard,
     this._onEditUrlCard,
     this._onDeleteCard,
+    this._onOpenBrowser,
   );
 
   @override
@@ -87,6 +89,7 @@ class SBCardListView extends StatelessWidget {
         onSelect,
         () => _onEditUrlCard(data),
         () => _onDeleteCard(data),
+        () => _onOpenBrowser(data.url),
       );
     }
 

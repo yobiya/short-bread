@@ -4,6 +4,7 @@ import 'SBCardBaseView.dart';
 
 class SBUrlCardView extends SBCardBaseView {
   final SBUrlCardData _data;
+  final void Function() _onTapOpenBrowserButton;
 
   SBUrlCardView(
     this._data,
@@ -11,6 +12,7 @@ class SBUrlCardView extends SBCardBaseView {
     void Function() onSelect,
     void Function() onTapEditButton,
     void Function() onTapDeleteButton,
+    this._onTapOpenBrowserButton,
   ) : super(
           _data,
           selected,
@@ -22,10 +24,16 @@ class SBUrlCardView extends SBCardBaseView {
   @override
   Widget buildContent(BuildContext context) {
     return Column(children: [
-      Text(
-        _data.url,
-        style: Theme.of(context).textTheme.bodyText1,
-      ),
+      Row(children: [
+        Text(
+          _data.url,
+          style: Theme.of(context).textTheme.bodyText1,
+        ),
+        IconButton(
+          icon: Icon(Icons.open_in_browser),
+          onPressed: _onTapOpenBrowserButton,
+        ),
+      ]),
       Text(
         _data.description,
         style: Theme.of(context).textTheme.bodyText1,

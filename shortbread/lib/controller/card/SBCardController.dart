@@ -7,6 +7,7 @@ import 'package:shortbread/model/card/SBCardModel.dart';
 import 'package:shortbread/view/card/SBCardListView.dart';
 import 'package:shortbread/view/card/SBNoteCardEditDialog.dart';
 import 'package:shortbread/view/card/SBUrlCardEditDialogView.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class SBCardControllerDelegates {
   final Delegate<int> onChangedBoxId;
@@ -60,6 +61,7 @@ class _SBCardController extends State<SBCardControllerView> {
       _showUrlCardCreateDialog,
       _showUrlCardEditDialog,
       _showCardDeleteDialog,
+      _openBrowser,
     );
   }
 
@@ -161,5 +163,9 @@ class _SBCardController extends State<SBCardControllerView> {
     });
 
     _closeDialog();
+  }
+
+  Future<bool> _openBrowser(String url) async {
+    return await launch(url);
   }
 }
