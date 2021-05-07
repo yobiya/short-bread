@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shortbread/common/utility/Delegate.dart';
 import 'package:shortbread/common/view/DeleteDialogView.dart';
+import 'package:shortbread/common/view/MessageDialogView.dart';
 import 'package:shortbread/data/card/SBCardData.dart';
 import 'package:shortbread/model/card/SBCardModel.dart';
 import 'package:shortbread/view/card/SBCardListView.dart';
@@ -166,6 +167,21 @@ class _SBCardController extends State<SBCardControllerView> {
   }
 
   Future<bool> _openBrowser(String url) async {
-    return await launch(url);
+    if (await canLaunch(url)) {
+      return await launch(url);
+    }
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return MessageDialogView(
+          'Can not open URL',
+          url,
+          _closeDialog,
+        );
+      },
+    );
+
+    return false;
   }
 }
