@@ -23,7 +23,7 @@ class SBBoxView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
-      elevation: _selected ? 10 : Theme.of(context).cardTheme.elevation,
+      elevation: _selected ? 6 : Theme.of(context).cardTheme.elevation,
       child: InkWell(
         onTap: this._onSelect,
         child: Column(children: [
