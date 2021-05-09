@@ -24,19 +24,20 @@ class SBUrlCardView extends SBCardBaseView {
   @override
   Widget buildContent(BuildContext context) {
     return Column(children: [
-      Row(children: [
-        Text(
-          _data.url,
-          style: Theme.of(context).textTheme.bodyText1,
-        ),
-        IconButton(
-          icon: Icon(Icons.open_in_browser),
-          onPressed: _onTapOpenBrowserButton,
-        ),
-      ]),
-      Text(
-        _data.description,
-        style: Theme.of(context).textTheme.bodyText1,
+      Padding(
+        padding: EdgeInsets.fromLTRB(16, 4, 8, 4),
+        child: Row(children: [
+          Expanded(
+            child: Text(
+              _data.url,
+              style: TextStyle(color: Colors.blue.shade800),
+            ),
+          ),
+          IconButton(
+            icon: Icon(Icons.open_in_browser),
+            onPressed: _onTapOpenBrowserButton,
+          ),
+        ]),
       ),
     ]);
   }
