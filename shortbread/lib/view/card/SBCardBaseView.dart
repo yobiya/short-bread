@@ -32,19 +32,18 @@ abstract class SBCardBaseView extends StatelessWidget {
             child: Row(
               children: [
                 Expanded(
-                  child: Container(
-                    height: 42,
+                  child: Padding(
+                    padding: EdgeInsets.fromLTRB(8, 4, 4, 4),
                     child: Align(
-                      alignment: Alignment.topLeft,
+                      alignment: Alignment.centerLeft,
                       child: Text(
                         _data.title,
-                        style: Theme.of(context).textTheme.subtitle1,
+                        style: Theme.of(context).textTheme.headline6,
                       ),
                     ),
                   ),
                 ),
                 PopupMenuButton<String>(
-                  padding: EdgeInsets.zero,
                   onSelected: _onTappedMenuItem,
                   itemBuilder: _buildMenuItemList,
                 ),
