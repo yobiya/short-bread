@@ -51,7 +51,7 @@ abstract class SBCardBaseView extends StatelessWidget {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(8),
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 16),
             child: Align(
               alignment: Alignment.center,
               child: buildContent(context),
