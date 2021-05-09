@@ -46,11 +46,11 @@ class SBCardModel {
 
       if (targetData is SBNoteCardData && data is SBNoteCardData) {
         targetData.title = data.title;
-        targetData.note = data.note;
+        targetData.description = data.description;
       } else if (targetData is SBUrlCardData && data is SBUrlCardData) {
         targetData.title = data.title;
-        targetData.url = data.url;
         targetData.description = data.description;
+        targetData.url = data.url;
       }
     }
 

@@ -7,17 +7,25 @@ abstract class SBCardBaseData {
   static const jsonKeyId = 'id';
   static const jsonKeyBoxId = 'box-id';
   static const jsonKeyTitle = 'title';
+  static const jsonKeyDescription = 'description';
 
   int id;
   int boxId;
   String title;
+  String description;
 
-  SBCardBaseData(this.id, this.boxId, this.title);
+  SBCardBaseData(
+    this.id,
+    this.boxId,
+    this.title,
+    this.description,
+  );
 
   SBCardBaseData.copy(SBCardBaseData source)
       : id = source.id,
         boxId = source.boxId,
-        title = source.title;
+        title = source.title,
+        description = source.description;
 
   factory SBCardBaseData.json(String json) {
     var jsonMap = jsonDecode(json);
@@ -35,7 +43,8 @@ abstract class SBCardBaseData {
   SBCardBaseData.jsonMap(Map<String, Object> jsonMap)
       : id = jsonMap[jsonKeyId],
         boxId = jsonMap[jsonKeyBoxId],
-        title = jsonMap[jsonKeyTitle];
+        title = jsonMap[jsonKeyTitle],
+        description = jsonMap[jsonKeyDescription];
 
   String toJson();
 
@@ -45,6 +54,7 @@ abstract class SBCardBaseData {
       jsonKeyId: id,
       jsonKeyBoxId: boxId,
       jsonKeyTitle: title,
+      jsonKeyDescription: description,
     };
 
     return jsonMap;
@@ -52,24 +62,25 @@ abstract class SBCardBaseData {
 }
 
 class SBNoteCardData extends SBCardBaseData {
-  static const jsonKeyNote = 'note';
+  SBNoteCardData(
+    int id,
+    int boxId,
+    String title,
+    String description,
+  ) : super(
+          id,
+          boxId,
+          title,
+          description,
+        );
 
-  String note;
+  SBNoteCardData.copy(SBNoteCardData source) : super.copy(source);
 
-  SBNoteCardData(int id, int boxId, String title, this.note) : super(id, boxId, title);
-
-  SBNoteCardData.copy(SBNoteCardData source)
-      : note = source.note,
-        super.copy(source);
-
-  SBNoteCardData.jsonMap(Map<String, Object> jsonMap)
-      : note = jsonMap[jsonKeyNote],
-        super.jsonMap(jsonMap);
+  SBNoteCardData.jsonMap(Map<String, Object> jsonMap) : super.jsonMap(jsonMap);
 
   @override
   String toJson() {
     var jsonMap = createBaseJsonMap(SBCardTypes.note);
-    jsonMap[jsonKeyNote] = note;
 
     return jsonEncode(jsonMap);
   }
@@ -77,34 +88,34 @@ class SBNoteCardData extends SBCardBaseData {
 
 class SBUrlCardData extends SBCardBaseData {
   static const jsonKeyUrl = 'url';
-  static const jsonKeyDescription = 'description';
 
   String url;
-  String description;
 
   SBUrlCardData(
     int id,
     int boxId,
     String title,
+    String description,
     this.url,
-    this.description,
-  ) : super(id, boxId, title);
+  ) : super(
+          id,
+          boxId,
+          title,
+          description,
+        );
 
   SBUrlCardData.copy(SBUrlCardData source)
       : url = source.url,
-        description = source.description,
         super.copy(source);
 
   SBUrlCardData.jsonMap(Map<String, Object> jsonMap)
       : url = jsonMap[jsonKeyUrl],
-        description = jsonMap[jsonKeyDescription],
         super.jsonMap(jsonMap);
 
   @override
   String toJson() {
     var jsonMap = createBaseJsonMap(SBCardTypes.url);
     jsonMap[jsonKeyUrl] = url;
-    jsonMap[jsonKeyDescription] = description;
 
     return jsonEncode(jsonMap);
   }

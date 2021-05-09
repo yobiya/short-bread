@@ -25,10 +25,10 @@ class SBNoteCardEditDialogView extends SBCardEditDialogBaseView {
             border: OutlineInputBorder(),
             labelText: 'Note',
           ),
-          controller: TextEditingController(text: _edittingData.note),
+          controller: TextEditingController(text: _edittingData.description),
           keyboardType: TextInputType.multiline,
           maxLines: 12,
-          onChanged: (text) => _edittingData.note = text,
+          onChanged: (text) => _edittingData.description = text,
         ),
       ),
     ];
