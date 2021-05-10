@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:shortbread/common/view/SBBoxCardBaseView.dart';
 import 'package:shortbread/data/card/SBCardData.dart';
-import 'SBCardBaseView.dart';
 
-class SBNoteCardView extends SBCardBaseView {
+class SBNoteCardView extends SBBoxCardBaseView {
   SBNoteCardView(
     SBNoteCardData data,
     bool selected,
@@ -10,7 +10,8 @@ class SBNoteCardView extends SBCardBaseView {
     void Function() onTapEditButton,
     void Function() onTapDeleteButton,
   ) : super(
-          data,
+          data.title,
+          data.description,
           selected,
           onSelect,
           onTapEditButton,

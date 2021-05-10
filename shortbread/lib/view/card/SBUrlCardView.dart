@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:shortbread/common/view/SBBoxCardBaseView.dart';
 import 'package:shortbread/data/card/SBCardData.dart';
-import 'SBCardBaseView.dart';
 
-class SBUrlCardView extends SBCardBaseView {
+class SBUrlCardView extends SBBoxCardBaseView {
   final SBUrlCardData _data;
   final void Function() _onTapOpenBrowserButton;
 
@@ -14,7 +14,8 @@ class SBUrlCardView extends SBCardBaseView {
     void Function() onTapDeleteButton,
     this._onTapOpenBrowserButton,
   ) : super(
-          _data,
+          _data.title,
+          _data.description,
           selected,
           onSelect,
           onTapEditButton,

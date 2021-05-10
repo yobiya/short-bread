@@ -1,19 +1,20 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:shortbread/data/card/SBCardData.dart';
 
-abstract class SBCardBaseView extends StatelessWidget {
+abstract class SBBoxCardBaseView extends StatelessWidget {
   static const _editMenuItemName = 'edit';
   static const _deleteMenuItemName = 'delete';
 
-  final SBCardBaseData _data;
+  final String _title;
+  final String _description;
   final bool _selected;
   final void Function() _onSelect;
   final void Function() _onTapEditButton;
   final void Function() _onTapDeleteButton;
 
-  SBCardBaseView(
-    this._data,
+  SBBoxCardBaseView(
+    this._title,
+    this._description,
     this._selected,
     this._onSelect,
     this._onTapEditButton,
@@ -37,7 +38,7 @@ abstract class SBCardBaseView extends StatelessWidget {
                     child: Align(
                       alignment: Alignment.centerLeft,
                       child: Text(
-                        _data.title,
+                        _title,
                         style: Theme.of(context).textTheme.headline6,
                       ),
                     ),
@@ -56,7 +57,7 @@ abstract class SBCardBaseView extends StatelessWidget {
             child: Align(
               alignment: Alignment.topLeft,
               child: Text(
-                _data.description,
+                _description,
                 style: Theme.of(context).textTheme.bodyText1,
               ),
             ),
