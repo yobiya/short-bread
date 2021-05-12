@@ -6,6 +6,7 @@ import 'package:shortbread/common/view/MessageDialogView.dart';
 import 'package:shortbread/data/card/SBCardData.dart';
 import 'package:shortbread/model/card/SBCardModel.dart';
 import 'package:shortbread/view/card/SBCardListView.dart';
+import 'package:shortbread/view/card/SBFolderCardEditDialogView.dart';
 import 'package:shortbread/view/card/SBNoteCardEditDialog.dart';
 import 'package:shortbread/view/card/SBUrlCardEditDialogView.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -61,6 +62,8 @@ class _SBCardController extends State<SBCardControllerView> {
       _showNoteCardEditDialog,
       _showUrlCardCreateDialog,
       _showUrlCardEditDialog,
+      _showFolderCardCreateDialog,
+      _showFolderCardEditDialog,
       _showCardDeleteDialog,
       _openBrowser,
     );
@@ -124,6 +127,36 @@ class _SBCardController extends State<SBCardControllerView> {
       builder: (context) {
         return SBUrlCardEditDialogView(
           'Edit URL card',
+          data,
+          _closeDialog,
+          _closeDialogAndSave,
+        );
+      },
+    );
+  }
+
+  void _showFolderCardCreateDialog() {
+    var data = widget._cardModel.createFolderCardData(_selectedBoxId);
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return SBFolderCardEditDialogView(
+          'New folder card',
+          data,
+          _closeDialog,
+          _closeDialogAndSave,
+        );
+      },
+    );
+  }
+
+  void _showFolderCardEditDialog(SBFolderCardData data) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return SBFolderCardEditDialogView(
+          'Edit folder card',
           data,
           _closeDialog,
           _closeDialogAndSave,

@@ -30,6 +30,15 @@ class SBCardModel {
     return SBUrlCardData(maxId + 1, boxId, '', '', '');
   }
 
+  SBFolderCardData createFolderCardData(int boxId) {
+    int maxId = 0;
+    for (var data in _dataList) {
+      maxId = max(maxId, data.id);
+    }
+
+    return SBFolderCardData(maxId + 1, boxId, '', '', '');
+  }
+
   Iterable<SBCardBaseData> getDataCollection(int boxId) {
     return _dataList.where((data) => data.boxId == boxId);
   }
@@ -51,6 +60,10 @@ class SBCardModel {
         targetData.title = data.title;
         targetData.description = data.description;
         targetData.url = data.url;
+      } else if (targetData is SBFolderCardData && data is SBFolderCardData) {
+        targetData.title = data.title;
+        targetData.description = data.description;
+        targetData.path = data.path;
       }
     }
 

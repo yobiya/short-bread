@@ -35,6 +35,8 @@ abstract class SBCardBaseData {
         return SBNoteCardData.jsonMap(jsonMap);
       case SBCardTypes.url:
         return SBUrlCardData.jsonMap(jsonMap);
+      case SBCardTypes.folder:
+        return SBFolderCardData.jsonMap(jsonMap);
     }
 
     return null;
@@ -116,6 +118,41 @@ class SBUrlCardData extends SBCardBaseData {
   String toJson() {
     var jsonMap = createBaseJsonMap(SBCardTypes.url);
     jsonMap[jsonKeyUrl] = url;
+
+    return jsonEncode(jsonMap);
+  }
+}
+
+class SBFolderCardData extends SBCardBaseData {
+  static const jsonKeyPath = 'path';
+
+  String path;
+
+  SBFolderCardData(
+    int id,
+    int boxId,
+    String title,
+    String description,
+    this.path,
+  ) : super(
+          id,
+          boxId,
+          title,
+          description,
+        );
+
+  SBFolderCardData.copy(SBFolderCardData source)
+      : path = source.path,
+        super.copy(source);
+
+  SBFolderCardData.jsonMap(Map<String, Object> jsonMap)
+      : path = jsonMap[jsonKeyPath],
+        super.jsonMap(jsonMap);
+
+  @override
+  String toJson() {
+    var jsonMap = createBaseJsonMap(SBCardTypes.folder);
+    jsonMap[jsonKeyPath] = path;
 
     return jsonEncode(jsonMap);
   }

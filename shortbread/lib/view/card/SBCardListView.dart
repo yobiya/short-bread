@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shortbread/common/utility/CollectionUtility.dart';
 import 'package:shortbread/data/card/SBCardData.dart';
+import 'package:shortbread/view/card/SBFolderCardView.dart';
 import 'package:shortbread/view/card/SBNoteCardView.dart';
 import 'package:shortbread/common/definition/CardDefinitions.dart';
 import 'package:shortbread/view/card/SBUrlCardView.dart';
@@ -14,6 +15,8 @@ class SBCardListView extends StatelessWidget {
   final void Function(SBNoteCardData) _onEditNoteCard;
   final void Function() _onCreateUrlCard;
   final void Function(SBUrlCardData) _onEditUrlCard;
+  final void Function() _onCreateFolderCard;
+  final void Function(SBFolderCardData) _onEditFolderCard;
   final void Function(SBCardBaseData) _onDeleteCard;
   final Future<bool> Function(String) _onOpenBrowser;
 
@@ -25,6 +28,8 @@ class SBCardListView extends StatelessWidget {
     this._onEditNoteCard,
     this._onCreateUrlCard,
     this._onEditUrlCard,
+    this._onCreateFolderCard,
+    this._onEditFolderCard,
     this._onDeleteCard,
     this._onOpenBrowser,
   );
@@ -93,6 +98,16 @@ class SBCardListView extends StatelessWidget {
       );
     }
 
+    if (data is SBFolderCardData) {
+      return SBFolderCardView(
+        data,
+        selected,
+        onSelect,
+        () => _onEditFolderCard(data),
+        () => _onDeleteCard(data),
+      );
+    }
+
     return Container();
   }
 
@@ -106,6 +121,10 @@ class SBCardListView extends StatelessWidget {
         value: SBCardTypes.url,
         child: Text('URL card'),
       ),
+      PopupMenuItem<String>(
+        value: SBCardTypes.folder,
+        child: Text('Folder card'),
+      ),
     ];
   }
 
@@ -116,6 +135,9 @@ class SBCardListView extends StatelessWidget {
         break;
       case SBCardTypes.url:
         _onCreateUrlCard();
+        break;
+      case SBCardTypes.folder:
+        _onCreateFolderCard();
         break;
     }
   }
