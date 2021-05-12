@@ -37,7 +37,7 @@ abstract class SBBoxCardBaseView extends StatelessWidget {
                     padding: EdgeInsets.fromLTRB(8, 4, 4, 4),
                     child: Align(
                       alignment: Alignment.centerLeft,
-                      child: Text(
+                      child: SelectableText(
                         _title,
                         style: Theme.of(context).textTheme.headline6,
                       ),
@@ -56,7 +56,7 @@ abstract class SBBoxCardBaseView extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(16, 8, 16, 16),
             child: Align(
               alignment: Alignment.topLeft,
-              child: Text(
+              child: SelectableText(
                 _description,
                 style: Theme.of(context).textTheme.bodyText1,
               ),

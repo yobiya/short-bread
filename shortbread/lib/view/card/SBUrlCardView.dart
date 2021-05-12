@@ -29,7 +29,7 @@ class SBUrlCardView extends SBBoxCardBaseView {
         padding: EdgeInsets.fromLTRB(16, 4, 8, 4),
         child: Row(children: [
           Expanded(
-            child: Text(
+            child: SelectableText(
               _data.url,
               style: TextStyle(color: Colors.blue.shade800),
             ),
