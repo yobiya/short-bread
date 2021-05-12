@@ -18,19 +18,6 @@ class SBNoteCardEditDialogView extends SBCardEditDialogBaseView {
 
   @override
   Iterable<Widget> buildContexts() {
-    return [
-      Scrollbar(
-        child: TextField(
-          decoration: const InputDecoration(
-            border: OutlineInputBorder(),
-            labelText: 'Note',
-          ),
-          controller: TextEditingController(text: _edittingData.description),
-          keyboardType: TextInputType.multiline,
-          maxLines: 12,
-          onChanged: (text) => _edittingData.description = text,
-        ),
-      ),
-    ];
+    return [];
   }
 }

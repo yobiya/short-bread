@@ -28,8 +28,20 @@ abstract class SBCardEditDialogBaseView extends StatelessWidget {
               controller: TextEditingController(text: edittingData.title),
               onChanged: (text) => edittingData.title = text,
             ),
-            Container(height: 20),
             ...buildContexts(),
+            Container(height: 20),
+            Scrollbar(
+              child: TextField(
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText: 'Description',
+                ),
+                controller: TextEditingController(text: edittingData.description),
+                keyboardType: TextInputType.multiline,
+                maxLines: 8,
+                onChanged: (text) => edittingData.description = text,
+              ),
+            ),
           ],
         ),
       ),

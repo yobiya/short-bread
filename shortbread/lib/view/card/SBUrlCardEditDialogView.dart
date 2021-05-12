@@ -19,6 +19,7 @@ class SBUrlCardEditDialogView extends SBCardEditDialogBaseView {
   @override
   Iterable<Widget> buildContexts() {
     return [
+      Container(height: 20),
       TextField(
         decoration: const InputDecoration(
           border: OutlineInputBorder(),
@@ -27,19 +28,6 @@ class SBUrlCardEditDialogView extends SBCardEditDialogBaseView {
         minLines: 1,
         controller: TextEditingController(text: _edittingData.url),
         onChanged: (text) => _edittingData.url = text,
-      ),
-      Container(height: 20),
-      Scrollbar(
-        child: TextField(
-          decoration: const InputDecoration(
-            border: OutlineInputBorder(),
-            labelText: 'Description',
-          ),
-          controller: TextEditingController(text: _edittingData.description),
-          keyboardType: TextInputType.multiline,
-          maxLines: 8,
-          onChanged: (text) => _edittingData.description = text,
-        ),
       ),
     ];
   }
