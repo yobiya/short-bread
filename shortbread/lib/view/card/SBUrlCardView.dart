@@ -2,24 +2,34 @@ import 'package:flutter/material.dart';
 import 'package:shortbread/common/view/SBBoxCardBaseView.dart';
 import 'package:shortbread/data/card/SBCardData.dart';
 
+class SBUrlCardViewDelegates extends SBBoxCardBaseViewDelegates {
+  final void Function() onTapOpenBrowserButton;
+
+  SBUrlCardViewDelegates(
+    final void Function() onSelect,
+    final void Function() onTapEditButton,
+    final void Function() onTapDeleteButton,
+    this.onTapOpenBrowserButton,
+  ) : super(
+          onSelect,
+          onTapEditButton,
+          onTapDeleteButton,
+        );
+}
+
 class SBUrlCardView extends SBBoxCardBaseView {
   final SBUrlCardData _data;
-  final void Function() _onTapOpenBrowserButton;
+  final SBUrlCardViewDelegates _delegates;
 
   SBUrlCardView(
     this._data,
     bool selected,
-    void Function() onSelect,
-    void Function() onTapEditButton,
-    void Function() onTapDeleteButton,
-    this._onTapOpenBrowserButton,
+    this._delegates,
   ) : super(
           _data.title,
           _data.description,
           selected,
-          onSelect,
-          onTapEditButton,
-          onTapDeleteButton,
+          _delegates,
         );
 
   @override
@@ -36,7 +46,7 @@ class SBUrlCardView extends SBBoxCardBaseView {
           ),
           IconButton(
             icon: Icon(Icons.open_in_browser),
-            onPressed: _onTapOpenBrowserButton,
+            onPressed: _delegates.onTapOpenBrowserButton,
           ),
         ]),
       ),

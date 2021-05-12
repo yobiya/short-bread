@@ -43,13 +43,19 @@ class SBBoxListView extends StatelessWidget {
   }
 
   List<Widget> _buildContents() {
-    var boxViewCollection = _dataCollection.map((data) => SBBoxView(
-          data,
-          (_selectedId == data.id),
-          () => _onSelectBox(data.id),
-          () => _onEdit(data.id),
-          () => _onDelete(data.id),
-        ));
+    var boxViewCollection = _dataCollection.map((data) {
+      var delegates = SBBoxViewDelegates(
+        () => _onSelectBox(data.id),
+        () => _onEdit(data.id),
+        () => _onDelete(data.id),
+      );
+
+      return SBBoxView(
+        data,
+        (_selectedId == data.id),
+        delegates,
+      );
+    });
 
     return CollectionUtility.insertBetweenAll(
       boxViewCollection,

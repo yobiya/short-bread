@@ -80,34 +80,46 @@ class SBCardListView extends StatelessWidget {
 
   Widget buildCardView(SBCardBaseData data, bool selected, void Function() onSelect) {
     if (data is SBNoteCardData) {
-      return SBNoteCardView(
-        data,
-        selected,
+      var delegates = SBNoteCardViewDelegates(
         onSelect,
         () => _onEditNoteCard(data),
         () => _onDeleteCard(data),
       );
+
+      return SBNoteCardView(
+        data,
+        selected,
+        delegates,
+      );
     }
 
     if (data is SBUrlCardData) {
-      return SBUrlCardView(
-        data,
-        selected,
+      var delegates = SBUrlCardViewDelegates(
         onSelect,
         () => _onEditUrlCard(data),
         () => _onDeleteCard(data),
         () => _onOpenBrowser(data.url),
       );
+
+      return SBUrlCardView(
+        data,
+        selected,
+        delegates,
+      );
     }
 
     if (data is SBFolderCardData) {
-      return SBFolderCardView(
-        data,
-        selected,
+      var delegates = SBFolderCardViewDelegates(
         onSelect,
         () => _onEditFolderCard(data),
         () => _onDeleteCard(data),
         () => _onOpenFolder(data.path),
+      );
+
+      return SBFolderCardView(
+        data,
+        selected,
+        delegates,
       );
     }
 

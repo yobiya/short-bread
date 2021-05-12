@@ -2,24 +2,34 @@ import 'package:flutter/material.dart';
 import 'package:shortbread/common/view/SBBoxCardBaseView.dart';
 import 'package:shortbread/data/card/SBCardData.dart';
 
+class SBFolderCardViewDelegates extends SBBoxCardBaseViewDelegates {
+  final void Function() onTapOpenFolderButton;
+
+  SBFolderCardViewDelegates(
+    final void Function() onSelect,
+    final void Function() onTapEditButton,
+    final void Function() onTapDeleteButton,
+    this.onTapOpenFolderButton,
+  ) : super(
+          onSelect,
+          onTapEditButton,
+          onTapDeleteButton,
+        );
+}
+
 class SBFolderCardView extends SBBoxCardBaseView {
   final SBFolderCardData _data;
-  final void Function() _onTapOpenFolderButton;
+  final SBFolderCardViewDelegates _delegates;
 
   SBFolderCardView(
     this._data,
     bool selected,
-    void Function() onSelect,
-    void Function() onTapEditButton,
-    void Function() onTapDeleteButton,
-    this._onTapOpenFolderButton,
+    this._delegates,
   ) : super(
           _data.title,
           _data.description,
           selected,
-          onSelect,
-          onTapEditButton,
-          onTapDeleteButton,
+          _delegates,
         );
 
   @override
@@ -36,7 +46,7 @@ class SBFolderCardView extends SBBoxCardBaseView {
           ),
           IconButton(
             icon: Icon(Icons.folder_open),
-            onPressed: _onTapOpenFolderButton,
+            onPressed: _delegates.onTapOpenFolderButton,
           ),
         ]),
       ),

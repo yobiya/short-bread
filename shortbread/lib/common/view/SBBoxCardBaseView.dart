@@ -1,6 +1,18 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+class SBBoxCardBaseViewDelegates {
+  final void Function() onSelect;
+  final void Function() onTapEditButton;
+  final void Function() onTapDeleteButton;
+
+  SBBoxCardBaseViewDelegates(
+    this.onSelect,
+    this.onTapEditButton,
+    this.onTapDeleteButton,
+  );
+}
+
 abstract class SBBoxCardBaseView extends StatelessWidget {
   static const _editMenuItemName = 'edit';
   static const _deleteMenuItemName = 'delete';
@@ -8,17 +20,13 @@ abstract class SBBoxCardBaseView extends StatelessWidget {
   final String _title;
   final String _description;
   final bool _selected;
-  final void Function() _onSelect;
-  final void Function() _onTapEditButton;
-  final void Function() _onTapDeleteButton;
+  final SBBoxCardBaseViewDelegates _delegates;
 
   SBBoxCardBaseView(
     this._title,
     this._description,
     this._selected,
-    this._onSelect,
-    this._onTapEditButton,
-    this._onTapDeleteButton,
+    this._delegates,
   );
 
   @override
@@ -26,7 +34,7 @@ abstract class SBBoxCardBaseView extends StatelessWidget {
     return Card(
       elevation: _selected ? 6 : Theme.of(context).cardTheme.elevation,
       child: InkWell(
-        onTap: this._onSelect,
+        onTap: this._delegates.onSelect,
         child: Column(children: [
           Padding(
             padding: const EdgeInsets.all(8),
@@ -90,10 +98,10 @@ abstract class SBBoxCardBaseView extends StatelessWidget {
   void _onTappedMenuItem(String itemName) {
     switch (itemName) {
       case _editMenuItemName:
-        _onTapEditButton();
+        _delegates.onTapEditButton();
         break;
       case _deleteMenuItemName:
-        _onTapDeleteButton();
+        _delegates.onTapDeleteButton();
         break;
     }
   }
