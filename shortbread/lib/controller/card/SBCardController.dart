@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:shortbread/common/utility/Delegate.dart';
@@ -66,6 +67,7 @@ class _SBCardController extends State<SBCardControllerView> {
       _showFolderCardEditDialog,
       _showCardDeleteDialog,
       _openBrowser,
+      _openFolder,
     );
   }
 
@@ -216,5 +218,16 @@ class _SBCardController extends State<SBCardControllerView> {
     );
 
     return false;
+  }
+
+  Future<bool> _openFolder(String path) async {
+    Process.start(
+      'Explorer',
+      [
+        path,
+      ],
+    );
+
+    return true;
   }
 }

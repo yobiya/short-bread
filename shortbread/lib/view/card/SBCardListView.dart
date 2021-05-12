@@ -19,6 +19,7 @@ class SBCardListView extends StatelessWidget {
   final void Function(SBFolderCardData) _onEditFolderCard;
   final void Function(SBCardBaseData) _onDeleteCard;
   final Future<bool> Function(String) _onOpenBrowser;
+  final Future<bool> Function(String) _onOpenFolder;
 
   SBCardListView(
     this._dataCollection,
@@ -32,6 +33,7 @@ class SBCardListView extends StatelessWidget {
     this._onEditFolderCard,
     this._onDeleteCard,
     this._onOpenBrowser,
+    this._onOpenFolder,
   );
 
   @override
@@ -105,6 +107,7 @@ class SBCardListView extends StatelessWidget {
         onSelect,
         () => _onEditFolderCard(data),
         () => _onDeleteCard(data),
+        () => _onOpenFolder(data.path),
       );
     }
 
