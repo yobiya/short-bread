@@ -1,39 +1,40 @@
-@startuml
+@startuml 基礎設計
 
 title 基礎設計
 
-class StatelessWidget
-class StatefullWidget
-class State<StatefullWidget>
-class Model
-class View
-class Controller
-class ControllerView
-class Delegate
-class Delegates
-
 StatelessWidget <|-- View
-StatefullWidget <|-- ControllerView
-StatefullWidget *-- State
-State <|-- Controller
-Controller *-- Model
-Controller *-- View
-Delegates *-- Delegate
-Controller o-- Delegates
-ControllerView ..> Controller
-
-note right of Controller
-  Stateのみが状態の変更により
-  表示を更新できるため
-  ControllerはStateを継承する
-
-  選択状態などの一時的なViewの状態は
-  Controllerが持つ
+note bottom of View
+  個別のUI
+  状態は持たない
 end note
 
-note right of Delegate
-  Controller間のやり取りは
+StatefullWidget <|--ViewController
+note left of ViewController
+  Viewに表示する要素はViewControllerが設定する
+  StatelessWidgetを更新することができるのは
+  StatefullWidgetだけなので継承している
+end note
+
+class ViewParams
+note left of ViewParams
+  Viewの表示内容の情報
+  ViewControllerが生成と更新を行い
+  Viewは読み取り、入力を渡すのみ
+end note
+
+note bottom of Delegate
+  ViewController間、Model間のやり取りは
   Delegateで行う
 end note
+
+ViewController o--> View
+ViewController o--> ViewParams
+View *-- ViewParams
+ViewParams o-- ResponsiveCheckBoxViewParam
+ViewParams o-- ResponsiveTextFieldViewParam
+Page --> Delegates
+Page *-- Model
+Page *-- ViewController
+Delegates *-- Delegate
 
 @enduml
