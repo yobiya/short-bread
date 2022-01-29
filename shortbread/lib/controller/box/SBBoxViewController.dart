@@ -7,30 +7,30 @@ import 'package:shortbread/data/box/SBBoxData.dart';
 import 'package:shortbread/view/box/SBBoxEditDialogView.dart';
 import 'package:shortbread/view/box/SBBoxListView.dart';
 
-class SBBoxControllerDeleagets {
+class SBBoxViewControllerDelegates {
   final Delegate<int> onChangedBoxId;
 
-  SBBoxControllerDeleagets(this.onChangedBoxId);
+  SBBoxViewControllerDelegates(this.onChangedBoxId);
 }
 
-class SBBoxControllerView extends StatefulWidget {
-  final SBBoxControllerDeleagets _deleagets;
+class SBBoxViewController extends StatefulWidget {
+  final SBBoxViewControllerDelegates _deleagets;
   final SBBoxModel _boxModel;
   final int _selectedId;
 
-  SBBoxControllerView(this._deleagets, this._boxModel, this._selectedId);
+  SBBoxViewController(this._deleagets, this._boxModel, this._selectedId);
 
   @override
   State<StatefulWidget> createState() {
-    return _SBBoxController(_deleagets, _selectedId);
+    return _SBBoxViewControllerState(_deleagets, _selectedId);
   }
 }
 
-class _SBBoxController extends State<SBBoxControllerView> {
-  final SBBoxControllerDeleagets _deleagets;
+class _SBBoxViewControllerState extends State<SBBoxViewController> {
+  final SBBoxViewControllerDelegates _deleagets;
   int _selectedId;
 
-  _SBBoxController(this._deleagets, this._selectedId);
+  _SBBoxViewControllerState(this._deleagets, this._selectedId);
 
   @override
   Widget build(BuildContext context) {

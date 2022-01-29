@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'common/utility/Delegate.dart';
-import 'controller/box/SBBoxController.dart';
-import 'controller/card/SBCardController.dart';
+import 'controller/box/SBBoxViewController.dart';
+import 'controller/card/SBCardViewController.dart';
 import 'model/FileModel.dart';
 import 'model/box/SBBoxModel.dart';
 import 'model/card/SBCardModel.dart';
@@ -27,15 +27,15 @@ class MainPage extends StatefulWidget {
   MainPage({Key key}) : super(key: key);
 
   @override
-  _MainPageController createState() => _MainPageController();
+  _MainPageState createState() => _MainPageState();
 }
 
-class _MainPageController extends State<MainPage> {
+class _MainPageState extends State<MainPage> {
   final FileModel _fileModel = FileModel();
   SBBoxModel _boxModel;
   SBCardModel _cardModel;
 
-  _MainPageController() {
+  _MainPageState() {
     _boxModel = SBBoxModel(_fileModel);
     _cardModel = SBCardModel(_fileModel);
   }
@@ -49,11 +49,11 @@ class _MainPageController extends State<MainPage> {
 
     final onChangedBoxId = Delegate<int>();
 
-    final boxControllerDeleagets = SBBoxControllerDeleagets(onChangedBoxId);
-    final sbBoxControllerView = SBBoxControllerView(boxControllerDeleagets, _boxModel, startSelectedBoxId);
+    final boxViewControllerDeleagets = SBBoxViewControllerDelegates(onChangedBoxId);
+    final sbBoxViewController = SBBoxViewController(boxViewControllerDeleagets, _boxModel, startSelectedBoxId);
 
-    final cardControllerDelegates = SBCardControllerDelegates(onChangedBoxId);
-    final sbCardControllerView = SBCardControllerView(cardControllerDelegates, _cardModel, startSelectedBoxId, startSelectedCardId);
+    final cardViewControllerDelegates = SBCardViewControllerDelegates(onChangedBoxId);
+    final sbCardViewController = SBCardViewController(cardViewControllerDelegates, _cardModel, startSelectedBoxId, startSelectedCardId);
 
     return Container(
       decoration: BoxDecoration(color: Theme.of(context).backgroundColor),
@@ -61,9 +61,9 @@ class _MainPageController extends State<MainPage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Expanded(child: sbBoxControllerView),
+          Expanded(child: sbBoxViewController),
           VerticalDivider(),
-          Expanded(child: sbCardControllerView),
+          Expanded(child: sbCardViewController),
           VerticalDivider(),
           Expanded(
             child: Container(

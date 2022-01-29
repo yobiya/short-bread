@@ -12,19 +12,19 @@ import 'package:shortbread/view/card/SBNoteCardEditDialog.dart';
 import 'package:shortbread/view/card/SBUrlCardEditDialogView.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class SBCardControllerDelegates {
+class SBCardViewControllerDelegates {
   final Delegate<int> onChangedBoxId;
 
-  SBCardControllerDelegates(this.onChangedBoxId);
+  SBCardViewControllerDelegates(this.onChangedBoxId);
 }
 
-class SBCardControllerView extends StatefulWidget {
-  final SBCardControllerDelegates _delegates;
+class SBCardViewController extends StatefulWidget {
+  final SBCardViewControllerDelegates _delegates;
   final SBCardModel _cardModel;
   final int _selectedBoxId;
   final int _selectedCardId;
 
-  SBCardControllerView(
+  SBCardViewController(
     this._delegates,
     this._cardModel,
     this._selectedBoxId,
@@ -33,16 +33,16 @@ class SBCardControllerView extends StatefulWidget {
 
   @override
   State<StatefulWidget> createState() {
-    return _SBCardController(_delegates, _selectedBoxId, _selectedCardId);
+    return _SBCardViewControllerState(_delegates, _selectedBoxId, _selectedCardId);
   }
 }
 
-class _SBCardController extends State<SBCardControllerView> {
-  final SBCardControllerDelegates _delegates;
+class _SBCardViewControllerState extends State<SBCardViewController> {
+  final SBCardViewControllerDelegates _delegates;
   int _selectedBoxId;
   int _selectedCardId;
 
-  _SBCardController(this._delegates, this._selectedBoxId, this._selectedCardId) {
+  _SBCardViewControllerState(this._delegates, this._selectedBoxId, this._selectedCardId) {
     _delegates.onChangedBoxId.addReceiver((boxId) {
       setState(() {
         _selectedBoxId = boxId;
