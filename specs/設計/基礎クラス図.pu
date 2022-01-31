@@ -2,39 +2,37 @@
 
 title 基礎設計
 
-StatelessWidget <|-- View
 note bottom of View
   個別のUI
-  状態は持たない
+  状態を持たない場合はStatelessWidgetを継承する
+  状態を持つ場合はStatefulWidgetを継承する
 end note
 
-StatefullWidget <|--ViewController
-note left of ViewController
-  Viewに表示する要素はViewControllerが設定する
-  StatelessWidgetを更新することができるのは
-  StatefullWidgetだけなので継承している
+note bottom of ViewController
+  Viewの生成と
+  Viewからの入力を処理する
 end note
 
-class ViewParams
-note left of ViewParams
+note bottom of ViewParams
   Viewの表示内容の情報
   ViewControllerが生成と更新を行い
-  Viewは読み取り、入力を渡すのみ
+  Viewはこの値を元に自身を構築する
 end note
 
 note bottom of Delegate
-  ViewController間、Model間のやり取りは
+  ViewController間
+  Model間のやり取りは
   Delegateで行う
 end note
 
-ViewController o--> View
-ViewController o--> ViewParams
+ViewController ..> View
+ViewController *-- ViewParams
 View *-- ViewParams
-ViewParams o-- ResponsiveCheckBoxViewParam
-ViewParams o-- ResponsiveTextFieldViewParam
-Page --> Delegates
+Page *.. Delegate
 Page *-- Model
 Page *-- ViewController
-Delegates *-- Delegate
+Page *-- View
+ViewController --> Delegate
+Model --> Delegate
 
 @enduml
