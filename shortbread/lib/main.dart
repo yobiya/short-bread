@@ -32,6 +32,7 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
+  final _onChangedBoxId = Delegate<int>();
   final FileModel _fileModel = FileModel();
   SBBoxModel _boxModel;
   SBCardModel _cardModel;
@@ -40,7 +41,14 @@ class _MainPageState extends State<MainPage> {
   _MainPageState() {
     _boxModel = SBBoxModel(_fileModel);
     _cardModel = SBCardModel(_fileModel);
-    _boxListViewController = SBBoxListViewController();
+
+    var refreshView = () => setState(() => {});
+    _boxListViewController = SBBoxListViewController(
+      _boxModel.getDataCollection(),
+      0,
+      refreshView,
+      _onChangedBoxId.call,
+    );
   }
 
   @override
@@ -55,7 +63,7 @@ class _MainPageState extends State<MainPage> {
     final boxViewControllerDeleagets = SBBoxViewControllerDelegates(onChangedBoxId);
     final sbBoxViewController = SBBoxViewController(boxViewControllerDeleagets, _boxModel, startSelectedBoxId);
 
-    final cardViewControllerDelegates = SBCardViewControllerDelegates(onChangedBoxId);
+    final cardViewControllerDelegates = SBCardViewControllerDelegates(_onChangedBoxId);
     final sbCardViewController = SBCardViewController(cardViewControllerDelegates, _cardModel, startSelectedBoxId, startSelectedCardId);
 
     return Container(
@@ -64,7 +72,7 @@ class _MainPageState extends State<MainPage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Expanded(child: _boxListViewController.build()),
+          Expanded(child: _boxListViewController.build(context)),
           Expanded(child: sbBoxViewController),
           VerticalDivider(),
           Expanded(child: sbCardViewController),
