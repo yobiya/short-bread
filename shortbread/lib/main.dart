@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'common/utility/Delegate.dart';
+import 'controller/SBBoxListViewController.dart';
 import 'controller/box/SBBoxViewController.dart';
 import 'controller/card/SBCardViewController.dart';
 import 'model/FileModel.dart';
@@ -34,10 +35,12 @@ class _MainPageState extends State<MainPage> {
   final FileModel _fileModel = FileModel();
   SBBoxModel _boxModel;
   SBCardModel _cardModel;
+  SBBoxListViewController _boxListViewController;
 
   _MainPageState() {
     _boxModel = SBBoxModel(_fileModel);
     _cardModel = SBCardModel(_fileModel);
+    _boxListViewController = SBBoxListViewController();
   }
 
   @override
@@ -61,6 +64,7 @@ class _MainPageState extends State<MainPage> {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          Expanded(child: _boxListViewController.build()),
           Expanded(child: sbBoxViewController),
           VerticalDivider(),
           Expanded(child: sbCardViewController),
