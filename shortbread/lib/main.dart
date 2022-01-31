@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'common/utility/Delegate.dart';
 import 'controller/SBBoxListViewController.dart';
-import 'controller/box/SBBoxViewController.dart';
 import 'controller/card/SBCardViewController.dart';
 import 'model/FileModel.dart';
 import 'model/box/SBBoxModel.dart';
@@ -58,11 +57,6 @@ class _MainPageState extends State<MainPage> {
     final cardDataCollection = _cardModel.getDataCollection(startSelectedBoxId);
     final startSelectedCardId = cardDataCollection.isEmpty ? SBCardModel.invalidId : cardDataCollection.first.id;
 
-    final onChangedBoxId = Delegate<int>();
-
-    final boxViewControllerDeleagets = SBBoxViewControllerDelegates(onChangedBoxId);
-    final sbBoxViewController = SBBoxViewController(boxViewControllerDeleagets, _boxModel, startSelectedBoxId);
-
     final cardViewControllerDelegates = SBCardViewControllerDelegates(_onChangedBoxId);
     final sbCardViewController = SBCardViewController(cardViewControllerDelegates, _cardModel, startSelectedBoxId, startSelectedCardId);
 
@@ -73,7 +67,6 @@ class _MainPageState extends State<MainPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Expanded(child: _boxListViewController.build(context)),
-          Expanded(child: sbBoxViewController),
           VerticalDivider(),
           Expanded(child: sbCardViewController),
           VerticalDivider(),
