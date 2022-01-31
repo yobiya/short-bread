@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'common/utility/Delegate.dart';
 import 'controller/SBBoxListViewController.dart';
+import 'controller/SBCardListViewController.dart';
 import 'controller/card/SBCardViewController.dart';
 import 'model/FileModel.dart';
 import 'model/box/SBBoxModel.dart';
@@ -36,6 +37,7 @@ class _MainPageState extends State<MainPage> {
   SBBoxModel _boxModel;
   SBCardModel _cardModel;
   SBBoxListViewController _boxListViewController;
+  SBCardListViewController _cardListViewController;
 
   _MainPageState() {
     _boxModel = SBBoxModel(_fileModel);
@@ -48,6 +50,8 @@ class _MainPageState extends State<MainPage> {
       refreshView,
       _onChangedBoxId.call,
     );
+
+    _cardListViewController = SBCardListViewController();
   }
 
   @override
@@ -69,6 +73,7 @@ class _MainPageState extends State<MainPage> {
           Expanded(child: _boxListViewController.build(context)),
           VerticalDivider(),
           Expanded(child: sbCardViewController),
+          Expanded(child: _cardListViewController.build(context)),
           VerticalDivider(),
           Expanded(
             child: Container(
