@@ -43,15 +43,22 @@ class _MainPageState extends State<MainPage> {
     _boxModel = SBBoxModel(_fileModel);
     _cardModel = SBCardModel(_fileModel);
 
+    final boxDataCollection = _boxModel.getDataCollection();
+    final startSelectedBoxId = boxDataCollection.isEmpty ? SBBoxModel.invalidId : boxDataCollection.first.id;
+
     var refreshView = () => setState(() => {});
     _boxListViewController = SBBoxListViewController(
       _boxModel,
-      0,
+      startSelectedBoxId,
       refreshView,
       _onChangedBoxId.call,
     );
 
-    _cardListViewController = SBCardListViewController();
+    _cardListViewController = SBCardListViewController(
+      _cardModel,
+      startSelectedBoxId,
+      refreshView,
+    );
   }
 
   @override
