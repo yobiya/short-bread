@@ -44,7 +44,7 @@ class _MainPageState extends State<MainPage> {
 
     var refreshView = () => setState(() => {});
     _boxListViewController = SBBoxListViewController(
-      _boxModel.getDataCollection(),
+      _boxModel,
       0,
       refreshView,
       _onChangedBoxId.call,
