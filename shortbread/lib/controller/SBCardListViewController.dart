@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shortbread/common/utility/CollectionUtility.dart';
@@ -5,6 +6,8 @@ import 'package:shortbread/common/view/DeleteDialogView.dart';
 import 'package:shortbread/common/view/MessageDialogView.dart';
 import 'package:shortbread/data/card/SBCardData.dart';
 import 'package:shortbread/model/card/SBCardModel.dart';
+import 'package:shortbread/view/card/SBFolderCardEditDialogView.dart';
+import 'package:shortbread/view/card/SBFolderCardView.dart';
 import 'package:shortbread/view/card/SBNoteCardEditDialog.dart';
 import 'package:shortbread/view/card/SBNoteCardView.dart';
 import 'package:shortbread/view/card/SBUrlCardEditDialogView.dart';
@@ -44,12 +47,12 @@ class SBCardListViewController {
 
   List<Widget> _buildContents(BuildContext context) {
     var boxViewCollection = _cardModel.getDataCollection(_selectedBoxId).map(
-          (data) => _buildCardView(
-            context,
-            data,
-            (_selectedCardId == data.id),
-          ),
-        );
+      (data) => _buildCardView(
+        context,
+        data,
+        (_selectedCardId == data.id),
+      ),
+    );
 
     return CollectionUtility.insertBetweenAll(
       boxViewCollection,
@@ -92,6 +95,21 @@ class SBCardListViewController {
       );
     }
 
+    if (data is SBFolderCardData) {
+      var delegates = SBFolderCardViewDelegates(
+        onSelect,
+        () => _showFolderCardEditDialog(context, data),
+        () => _showCardDeleteDialog(context, data),
+        () => _openFolder(data.path),
+      );
+
+      return SBFolderCardView(
+        data,
+        selected,
+        delegates,
+      );
+    }
+
     return Container();
   }
 
@@ -118,6 +136,20 @@ class SBCardListViewController {
           data,
           () => _closeDialog(context),
           (data) => _closeDialogAndSave(context, data),
+        );
+      },
+    );
+  }
+
+  void _showFolderCardEditDialog(BuildContext context, SBFolderCardData data) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return SBFolderCardEditDialogView(
+          'Edit folder card',
+          data,
+          () => _closeDialog(context),
+          (data) => _closeDialogAndDelete(context, data),
         );
       },
     );
@@ -169,5 +201,16 @@ class SBCardListViewController {
     );
 
     return false;
+  }
+
+  Future<bool> _openFolder(String path) async {
+    Process.start(
+      'Explorer',
+      [
+        path,
+      ],
+    );
+
+    return true;
   }
 }

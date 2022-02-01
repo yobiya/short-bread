@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class DeleteDialogView extends StatelessWidget {
-  String _title;
-  String _targetNeme;
+  final String _title;
+  final String _targetNeme;
   final void Function() _onCancel;
   final void Function() _onDelete;
 
