@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'common/utility/Delegate.dart';
 import 'controller/SBBoxListViewController.dart';
 import 'controller/SBCardListViewController.dart';
-import 'controller/card/SBCardViewController.dart';
 import 'model/FileModel.dart';
 import 'model/box/SBBoxModel.dart';
 import 'model/card/SBCardModel.dart';
@@ -63,14 +62,6 @@ class _MainPageState extends State<MainPage> {
 
   @override
   Widget build(BuildContext context) {
-    final boxDataCollection = _boxModel.getDataCollection();
-    final startSelectedBoxId = boxDataCollection.isEmpty ? SBBoxModel.invalidId : boxDataCollection.first.id;
-    final cardDataCollection = _cardModel.getDataCollection(startSelectedBoxId);
-    final startSelectedCardId = cardDataCollection.isEmpty ? SBCardModel.invalidId : cardDataCollection.first.id;
-
-    final cardViewControllerDelegates = SBCardViewControllerDelegates(_onChangedBoxId);
-    final sbCardViewController = SBCardViewController(cardViewControllerDelegates, _cardModel, startSelectedBoxId, startSelectedCardId);
-
     return Container(
       decoration: BoxDecoration(color: Theme.of(context).backgroundColor),
       padding: EdgeInsets.all(10),
@@ -79,7 +70,6 @@ class _MainPageState extends State<MainPage> {
         children: [
           Expanded(child: _boxListViewController.build(context)),
           VerticalDivider(),
-          Expanded(child: sbCardViewController),
           Expanded(child: _cardListViewController.build(context)),
           VerticalDivider(),
           Expanded(
