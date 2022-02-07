@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shortbread/common/definition/CardDefinitions.dart';
 import 'package:shortbread/common/utility/CollectionUtility.dart';
 import 'package:shortbread/common/view/DeleteDialogView.dart';
 import 'package:shortbread/common/view/MessageDialogView.dart';
@@ -41,6 +42,15 @@ class SBCardListViewController {
             children: _buildContents(context),
           ),
         ),
+      ),
+      floatingActionButton: PopupMenuButton<String>(
+        child: FloatingActionButton(
+          child: const Icon(Icons.add),
+          onPressed: null,
+        ),
+        padding: EdgeInsets.zero,
+        onSelected: (cardType) => _onSelectedCreateCardMenuItem(context, cardType),
+        itemBuilder: _buildCreateCardMenuItemList,
       ),
     );
   }
@@ -113,6 +123,53 @@ class SBCardListViewController {
     return Container();
   }
 
+  List<PopupMenuItem<String>> _buildCreateCardMenuItemList(BuildContext context) {
+    return <PopupMenuItem<String>>[
+      PopupMenuItem<String>(
+        value: SBCardTypes.note,
+        child: Text('Note card'),
+      ),
+      PopupMenuItem<String>(
+        value: SBCardTypes.url,
+        child: Text('URL card'),
+      ),
+      PopupMenuItem<String>(
+        value: SBCardTypes.folder,
+        child: Text('Folder card'),
+      ),
+    ];
+  }
+
+  void _onSelectedCreateCardMenuItem(BuildContext context, String cardType) {
+    switch (cardType) {
+      case SBCardTypes.note:
+        _showNoteCardCreateDialog(context);
+        break;
+      case SBCardTypes.url:
+        _showUrlCardCreateDialog(context);
+        break;
+      case SBCardTypes.folder:
+        _showFolderCardCreateDialog(context);
+        break;
+    }
+  }
+
+  void _showNoteCardCreateDialog(BuildContext context) {
+    var data = _cardModel.createNoteCardData(_selectedBoxId);
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return SBNoteCardEditDialogView(
+          'New note card',
+          data,
+          () => _closeDialog(context),
+          (data) => _closeDialogAndSave(context, data),
+        );
+      },
+    );
+  }
+
   void _showNoteCardEditDialog(BuildContext context, SBNoteCardData data) {
     showDialog(
       context: context,
@@ -127,12 +184,44 @@ class SBCardListViewController {
     );
   }
 
+  void _showUrlCardCreateDialog(BuildContext context) {
+    var data = _cardModel.createUrlCardData(_selectedBoxId);
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return SBUrlCardEditDialogView(
+          'New URL card',
+          data,
+          () => _closeDialog(context),
+          (data) => _closeDialogAndSave(context, data),
+        );
+      },
+    );
+  }
+
   void _showUrlCardEditDialog(BuildContext context, SBUrlCardData data) {
     showDialog(
       context: context,
       builder: (context) {
         return SBUrlCardEditDialogView(
           'Edit URL card',
+          data,
+          () => _closeDialog(context),
+          (data) => _closeDialogAndSave(context, data),
+        );
+      },
+    );
+  }
+
+  void _showFolderCardCreateDialog(BuildContext context) {
+    var data = _cardModel.createFolderCardData(_selectedBoxId);
+
+    showDialog(
+      context: context,
+      builder: (context) {
+        return SBFolderCardEditDialogView(
+          'New folder card',
           data,
           () => _closeDialog(context),
           (data) => _closeDialogAndSave(context, data),
