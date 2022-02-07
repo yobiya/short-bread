@@ -55,6 +55,11 @@ class SBCardListViewController {
     );
   }
 
+  void setBoxId(int boxId) {
+    _selectedBoxId = boxId;
+    _refreshView();
+  }
+
   List<Widget> _buildContents(BuildContext context) {
     var boxViewCollection = _cardModel.getDataCollection(_selectedBoxId).map(
       (data) => _buildCardView(

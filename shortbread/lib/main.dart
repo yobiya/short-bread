@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'common/utility/Delegate.dart';
 import 'controller/SBBoxListViewController.dart';
 import 'controller/SBCardListViewController.dart';
 import 'model/FileModel.dart';
@@ -31,7 +30,6 @@ class MainPage extends StatefulWidget {
 }
 
 class _MainPageState extends State<MainPage> {
-  final _onChangedBoxId = Delegate<int>();
   final FileModel _fileModel = FileModel();
   SBBoxModel _boxModel;
   SBCardModel _cardModel;
@@ -46,17 +44,17 @@ class _MainPageState extends State<MainPage> {
     final startSelectedBoxId = boxDataCollection.isEmpty ? SBBoxModel.invalidId : boxDataCollection.first.id;
 
     var refreshView = () => setState(() => {});
-    _boxListViewController = SBBoxListViewController(
-      _boxModel,
-      startSelectedBoxId,
-      refreshView,
-      _onChangedBoxId.call,
-    );
-
     _cardListViewController = SBCardListViewController(
       _cardModel,
       startSelectedBoxId,
       refreshView,
+    );
+
+    _boxListViewController = SBBoxListViewController(
+      _boxModel,
+      startSelectedBoxId,
+      refreshView,
+      _cardListViewController.setBoxId,
     );
   }
 
